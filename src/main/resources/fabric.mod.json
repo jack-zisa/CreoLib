@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "creo",
+  "version": "${version}",
+  "name": "Creo Lib",
+  "description": "",
+  "authors": [
+    "creoii"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/creo-lib/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.github.creoii.creolib.client.CreoLibClient"
+    ],
+    "main": [
+      "com.github.creoii.creolib.CreoLib"
+    ]
+  },
+  "mixins": [
+    "creo-lib.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=",
+    "minecraft": ""
+  }
+}
