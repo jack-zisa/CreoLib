@@ -1,13 +1,15 @@
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
-    id 'maven-publish'
 }
 
-group = 'com.github.creoii'
-version = "${mod_version}"
+apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 version = project.mod_version
 group = project.maven_group
+
+sourceCompatibility = 1.17
+targetCompatibility = 1.17
 
 repositories {
     mavenCentral()
@@ -18,10 +20,6 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release.set(17)
 }
 
 java {
@@ -35,4 +33,9 @@ publishing {
             from components.java
         }
     }
+}
+
+wrapper {
+    gradleVersion = "7.6"
+    distributionType = Wrapper.DistributionType.ALL
 }
