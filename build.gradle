@@ -8,8 +8,8 @@ apply plugin: 'maven-publish'
 version = project.mod_version
 group = project.maven_group
 
-sourceCompatibility = 1.17
-targetCompatibility = 1.17
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -27,15 +27,21 @@ java {
     withJavadocJar()
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
+allprojects {
+    repositories {
+        maven {
+            url 'https://jitpack.io'
         }
     }
 }
 
-wrapper {
-    gradleVersion = "7.6"
-    distributionType = Wrapper.DistributionType.ALL
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = project.maven_group
+            artifactId = project.archives_base_name
+            version = project.mod_version
+        }
+    }
 }
