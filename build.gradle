@@ -9,12 +9,14 @@ apply plugin: 'maven-publish'
 
 version = project.mod_version
 group = project.maven_group
+archivesBaseName = "${name}-${project.minecraft_version}"
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+    maven{url 'https://jitpack.io'}
 }
 
 dependencies {
