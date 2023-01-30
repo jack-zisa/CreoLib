@@ -1,13 +1,20 @@
-package com.github.creoii.creolib.mixin;
+package com.github.creoii.creolib.mixin.entity;
 
+import com.github.creoii.creolib.enchantment.EquippableEnchantment;
 import com.github.creoii.creolib.registry.AttributeRegistry;
-import net.minecraft.entity.*;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Mixin(LivingEntity.class)
@@ -68,5 +76,21 @@ public abstract class LivingEntityMixin extends Entity {
     @Redirect(method = "handleFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;computeFallDamage(FF)I"))
     private int creo_lib_handleFallDamageGravity(LivingEntity entity, float fallDistance, float damageMultiplier) {
         return computeFallDamage(fallDistance * (float) (entity.getAttributeValue(AttributeRegistry.GENERIC_GRAVITY) * 12.5f), damageMultiplier);
+    }
+
+    @Inject(method = "onEquipStack", at = @At("TAIL"))
+    private void creo_caves_applyGravityEnchantments(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
+        Map<Enchantment, Integer> oldSet = EnchantmentHelper.get(oldStack);
+        oldSet.keySet().forEach(enchantment -> {
+            if (enchantment instanceof EquippableEnchantment equippableEnchantment) {
+                equippableEnchantment.onUnequip(world, this, oldStack, slot, oldSet.get(enchantment));
+            }
+        });
+        Map<Enchantment, Integer> newSet = EnchantmentHelper.get(newStack);
+        newSet.keySet().forEach(enchantment -> {
+            if (enchantment instanceof EquippableEnchantment equippableEnchantment) {
+                equippableEnchantment.onEquip(world, this, oldStack, slot, newSet.get(enchantment));
+            }
+        });
     }
 }

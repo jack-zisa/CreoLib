@@ -11,5 +11,5 @@ import net.minecraft.world.World;
 public interface BlockShearable {
     boolean isShearable(World world, BlockState state, BlockPos pos, PlayerEntity player, Random random, Direction side);
 
-    ActionResult onSheared(World world, BlockState state, BlockPos pos, PlayerEntity player, Random random, Direction side);
+    ActionResult onShear(World world, BlockState state, BlockPos pos, PlayerEntity player, Random random, Direction side);
 }

@@ -4,7 +4,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.EnumSet;

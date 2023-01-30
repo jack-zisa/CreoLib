@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.1-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -12,11 +12,6 @@ archivesBaseName = "${name}-${project.minecraft_version}"
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
-
-repositories {
-    mavenCentral()
-    maven{url 'https://jitpack.io'}
-}
 
 loom {
     accessWidenerPath = file("src/main/resources/creo_lib.accesswidener")
@@ -32,43 +27,4 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'https://jitpack.io'
-        }
-    }
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.maven_group
-            artifactId = project.archives_base_name
-            version = project.mod_version
-            from components.java
-
-            pom {
-                name = 'CreoLib'
-                description = 'A Minecraft Modding Library with various utilities to streamline the development process.'
-            }
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                username = "$user"
-                password = "$key"
-            }
-            url = "https://maven.pkg.jetbrains.space/"
-        }
-    }
-}
-
-wrapper {
-    gradleVersion = "7.6"
-    distributionType = Wrapper.DistributionType.ALL
 }

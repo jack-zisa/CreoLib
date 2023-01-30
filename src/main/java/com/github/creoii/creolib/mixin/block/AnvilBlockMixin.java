@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.mixin;
+package com.github.creoii.creolib.mixin.block;
 
 import com.github.creoii.creolib.block.Crushable;
 import net.minecraft.block.AnvilBlock;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AnvilBlock.class)
 public class AnvilBlockMixin {
     @Inject(method = "onLanding", at = @At("TAIL"))
-    private void great_big_world_destroyCrushables(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingBlockEntity fallingBlockEntity, CallbackInfo ci) {
+    private void creo_lib_destroyCrushables(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingBlockEntity fallingBlockEntity, CallbackInfo ci) {
         if (world.getBlockState(pos.down()).getBlock() instanceof Crushable crushable) {
             if (world.getRandom().nextFloat() > crushable.getCrushChance()) return;
 

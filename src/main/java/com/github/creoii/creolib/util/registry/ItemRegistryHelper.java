@@ -1,9 +1,11 @@
 package com.github.creoii.creolib.util.registry;
 
-import com.github.creoii.creolib.util.CreoFoodComponent;
+import com.github.creoii.creolib.util.CFoodComponent;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -36,41 +38,71 @@ public class ItemRegistryHelper {
 
     public record ItemGroupSettings(ItemGroup group, @Nullable ItemConvertible after) { }
 
-    public static class CreoItemSettings extends FabricItemSettings {
+    public static class CItemSettings extends FabricItemSettings {
         private ItemGroupSettings[] itemGroups;
         private int compostingChance;
         private int fuelPower;
         private boolean villagerCollectable;
         private int villagerFoodValue;
+        private int pickupDelay;
 
-        public CreoItemSettings compostingChance(int chance) {
+        public CItemSettings compostingChance(int chance) {
             compostingChance = chance;
             return this;
         }
 
-        public CreoItemSettings fuelPower(int power) {
+        public CItemSettings fuelPower(int power) {
             fuelPower = power;
             return this;
         }
 
-        public CreoItemSettings food(CreoFoodComponent foodComponent) {
+        public CItemSettings food(CFoodComponent foodComponent) {
             super.food(foodComponent);
             return this;
         }
 
-        public CreoItemSettings itemGroups(ItemGroupSettings[] itemGroups) {
+        public CItemSettings itemGroups(ItemGroupSettings[] itemGroups) {
             this.itemGroups = itemGroups;
             return this;
         }
 
-        public CreoItemSettings villagerCollectable() {
+        public CItemSettings villagerCollectable() {
             villagerCollectable = true;
             return this;
         }
 
-        public CreoItemSettings villagerFood(int value) {
+        public CItemSettings villagerFood(int value) {
             villagerFoodValue = value;
             return this;
+        }
+
+        public CItemSettings pickupDelay(int delay) {
+            pickupDelay = delay;
+            return this;
+        }
+
+        public int getCompostingChance() {
+            return compostingChance;
+        }
+
+        public int getFuelPower() {
+            return fuelPower;
+        }
+
+        public ItemGroupSettings[] getItemGroups() {
+            return itemGroups;
+        }
+
+        public int getVillagerFoodValue() {
+            return villagerFoodValue;
+        }
+
+        public boolean isVillagerCollectable() {
+            return villagerCollectable;
+        }
+
+        public int getPickupDelay() {
+            return pickupDelay;
         }
     }
 }

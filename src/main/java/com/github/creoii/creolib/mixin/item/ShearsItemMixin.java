@@ -1,9 +1,7 @@
-package com.github.creoii.creolib.mixin;
+package com.github.creoii.creolib.mixin.item;
 
 import com.github.creoii.creolib.util.BlockShearable;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Shearable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShearsItem;
@@ -26,7 +24,7 @@ public class ShearsItemMixin {
         PlayerEntity player = context.getPlayer();
         Direction side = context.getSide();
         if (state.getBlock() instanceof BlockShearable shearable && shearable.isShearable(world, state, pos, player, world.getRandom(), side)) {
-            cir.setReturnValue(shearable.onSheared(world, state, pos, player, world.getRandom(), side));
+            cir.setReturnValue(shearable.onShear(world, state, pos, player, world.getRandom(), side));
         }
     }
 }

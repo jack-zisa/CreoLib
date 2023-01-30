@@ -1,6 +1,6 @@
-package com.github.creoii.creolib.mixin;
+package com.github.creoii.creolib.mixin.block;
 
-import com.github.creoii.creolib.tag.CreoBlockTags;
+import com.github.creoii.creolib.tag.CBlockTags;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -17,9 +17,9 @@ public class BlockEntityTypeMixin {
     private static final ImmutableMap<BlockEntityType<?>, Predicate<BlockState>> SUPPORTING_BLOCK_ENTITIES = new ImmutableMap.Builder<BlockEntityType<?>, Predicate<BlockState>>()
             .put(BlockEntityType.SIGN, state -> state.isIn(BlockTags.SIGNS))
             .put(BlockEntityType.HANGING_SIGN, state -> state.isIn(BlockTags.ALL_HANGING_SIGNS))
-            .put(BlockEntityType.CHEST, state -> state.isIn(CreoBlockTags.CHESTS))
-            .put(BlockEntityType.TRAPPED_CHEST, state -> state.isIn(CreoBlockTags.TRAPPED_CHESTS))
-            .put(BlockEntityType.FURNACE, state -> state.isIn(CreoBlockTags.FURNACES))
+            .put(BlockEntityType.CHEST, state -> state.isIn(CBlockTags.CHESTS))
+            .put(BlockEntityType.TRAPPED_CHEST, state -> state.isIn(CBlockTags.TRAPPED_CHESTS))
+            .put(BlockEntityType.FURNACE, state -> state.isIn(CBlockTags.FURNACES))
             .put(BlockEntityType.BANNER, state -> state.isIn(BlockTags.BANNERS))
             .put(BlockEntityType.BED, state -> state.isIn(BlockTags.BEDS))
             .put(BlockEntityType.CAMPFIRE, state -> state.isIn(BlockTags.CAMPFIRES))
