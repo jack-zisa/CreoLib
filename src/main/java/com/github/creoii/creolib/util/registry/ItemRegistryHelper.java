@@ -1,7 +1,5 @@
 package com.github.creoii.creolib.util.registry;
 
-import com.github.creoii.creolib.util.CFoodComponent;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -37,72 +35,4 @@ public class ItemRegistryHelper {
     }
 
     public record ItemGroupSettings(ItemGroup group, @Nullable ItemConvertible after) { }
-
-    public static class CItemSettings extends FabricItemSettings {
-        private ItemGroupSettings[] itemGroups;
-        private int compostingChance;
-        private int fuelPower;
-        private boolean villagerCollectable;
-        private int villagerFoodValue;
-        private int pickupDelay;
-
-        public CItemSettings compostingChance(int chance) {
-            compostingChance = chance;
-            return this;
-        }
-
-        public CItemSettings fuelPower(int power) {
-            fuelPower = power;
-            return this;
-        }
-
-        public CItemSettings food(CFoodComponent foodComponent) {
-            super.food(foodComponent);
-            return this;
-        }
-
-        public CItemSettings itemGroups(ItemGroupSettings[] itemGroups) {
-            this.itemGroups = itemGroups;
-            return this;
-        }
-
-        public CItemSettings villagerCollectable() {
-            villagerCollectable = true;
-            return this;
-        }
-
-        public CItemSettings villagerFood(int value) {
-            villagerFoodValue = value;
-            return this;
-        }
-
-        public CItemSettings pickupDelay(int delay) {
-            pickupDelay = delay;
-            return this;
-        }
-
-        public int getCompostingChance() {
-            return compostingChance;
-        }
-
-        public int getFuelPower() {
-            return fuelPower;
-        }
-
-        public ItemGroupSettings[] getItemGroups() {
-            return itemGroups;
-        }
-
-        public int getVillagerFoodValue() {
-            return villagerFoodValue;
-        }
-
-        public boolean isVillagerCollectable() {
-            return villagerCollectable;
-        }
-
-        public int getPickupDelay() {
-            return pickupDelay;
-        }
-    }
 }

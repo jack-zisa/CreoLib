@@ -1,9 +1,12 @@
 package com.github.creoii.creolib.mixin.item;
 
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.ApiStatus;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
-@ApiStatus.Internal
+@Mixin(Item.Settings.class)
 public interface ItemSettingsAccessor {
-    Item.Settings getItemSettings();
+    @Accessor("foodComponent")
+    FoodComponent getFoodComponent();
 }
