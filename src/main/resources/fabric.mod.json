@@ -9,7 +9,7 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/creo-lib/icon.png",
+  "icon": "assets/creo_lib/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -19,6 +19,7 @@
       "com.github.creoii.creolib.CreoLib"
     ]
   },
+  "accessWidener": "creo_lib.accesswidener",
   "mixins": [
     "creo-lib.mixins.json"
   ],

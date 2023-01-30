@@ -4,8 +4,12 @@
   "package": "com.github.creoii.creolib.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockAccessor",
     "AnvilBlockMixin",
-    "LivingEntityMixin"
+    "BlockEntityTypeMixin",
+    "ItemMixin",
+    "LivingEntityMixin",
+    "ShearsItemMixin"
   ],
   "client": [
   ],
