@@ -5,11 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
 public class WorldUtil {
-    public static void broadcast(ServerWorld world, Text text, Predicate<ServerPlayerEntity> playerEntityPredicate) {
+    public static void broadcast(@NotNull ServerWorld world, Text text, Predicate<ServerPlayerEntity> playerEntityPredicate) {
         world.getPlayers().forEach(playerEntity -> {
             if (playerEntityPredicate.test(playerEntity)) {
                 playerEntity.sendMessage(text);

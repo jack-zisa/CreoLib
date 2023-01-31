@@ -11,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
-import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
@@ -45,8 +44,7 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
     @Override
     protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         if (context.getWorld().getChunkManager() instanceof ServerChunkManager chunkManager) {
-            NoiseConfig noiseConfig = chunkManager.getNoiseConfig();
-            DoublePerlinNoiseSampler sampler = noiseConfig.getOrCreateSampler(noise);
+            DoublePerlinNoiseSampler sampler = chunkManager.getNoiseConfig().getOrCreateSampler(noise);
             double noiseValue = sampler.sample(pos.getX(), pos.getY(), pos.getZ());
             for (WorldUtil.Range range : ranges) {
                 if (noiseValue >= range.min() && noiseValue < range.max()) {

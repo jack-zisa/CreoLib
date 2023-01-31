@@ -56,8 +56,10 @@ package com.github.creoii.creolib.util.noise;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.math.random.Random;
 
 public class FastNoiseLite {
+    private static final Random RANDOM = Random.create();
     public enum NoiseType implements StringIdentifiable {
         OpenSimplex2("open_simplex_2"),
         OpenSimplex2S("open_simplex_2s"),
@@ -262,6 +264,7 @@ public class FastNoiseLite {
             CellularDistanceFunction cellularDistanceFunction, CellularReturnType cellularReturnType, float cellularJitter,
             DomainWarpType domainWarpType, float domainWarpAmp
     ) {
+        SetSeed(RANDOM.nextInt(Integer.MAX_VALUE));
         SetFrequency(frequency);
         SetNoiseType(noiseType);
         SetRotationType3D(rotationType3D);
