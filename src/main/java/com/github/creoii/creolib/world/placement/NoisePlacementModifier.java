@@ -16,7 +16,6 @@ import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 import java.util.List;
 
-
 /**
  * Before square placement
  */
@@ -31,13 +30,9 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
     private final List<WorldUtil.Range> ranges;
 
-    private NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
+    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
         this.noise = noise;
         this.ranges = ranges;
-    }
-
-    public static NoisePlacementModifier of(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
-        return new NoisePlacementModifier(noise, ranges);
     }
 
     @Override

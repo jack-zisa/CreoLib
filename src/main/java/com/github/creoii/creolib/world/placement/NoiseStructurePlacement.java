@@ -28,7 +28,7 @@ public class NoiseStructurePlacement extends StructurePlacement {
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
     private final List<WorldUtil.Range> ranges;
 
-    private NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;

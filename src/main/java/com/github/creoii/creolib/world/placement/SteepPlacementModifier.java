@@ -23,12 +23,8 @@ public class SteepPlacementModifier extends AbstractConditionalPlacementModifier
     });
     private final int steepness;
 
-    private SteepPlacementModifier(int steepness) {
+    public SteepPlacementModifier(int steepness) {
         this.steepness = steepness;
-    }
-
-    public static SteepPlacementModifier of(int steepness) {
-        return new SteepPlacementModifier(steepness);
     }
 
     @Override

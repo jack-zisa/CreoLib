@@ -27,13 +27,9 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
     private final FastNoiseLite noise;
     private final List<WorldUtil.Range> ranges;
 
-    private FastNoisePlacementModifier(FastNoiseLite noise, List<WorldUtil.Range> ranges) {
+    public FastNoisePlacementModifier(FastNoiseLite noise, List<WorldUtil.Range> ranges) {
         this.noise = noise;
         this.ranges = ranges;
-    }
-
-    public static FastNoisePlacementModifier of(FastNoiseLite noise, List<WorldUtil.Range> ranges) {
-        return new FastNoisePlacementModifier(noise, ranges);
     }
 
     @Override
