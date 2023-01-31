@@ -3,6 +3,11 @@ plugins {
     id 'maven-publish'
 }
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
@@ -27,4 +32,27 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+publishing {
+    publications {
+        creolib(MavenPublication) {
+            from components.java
+            pom {
+                licenses {
+                    license {
+                        name = 'GNU Lesser General Public License v3.0'
+                        url = 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'sampleRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
 }
