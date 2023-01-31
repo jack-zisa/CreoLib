@@ -24,7 +24,6 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
             return predicate.ranges;
         })).apply(instance, FastNoisePlacementModifier::new);
     });
-
     private final FastNoiseLite noise;
     private final List<WorldUtil.Range> ranges;
 

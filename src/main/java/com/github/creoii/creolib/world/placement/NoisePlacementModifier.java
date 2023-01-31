@@ -28,7 +28,6 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
             return predicate.ranges;
         })).apply(instance, NoisePlacementModifier::new);
     });
-
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
     private final List<WorldUtil.Range> ranges;
 
