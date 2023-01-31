@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.world.surfacerule;
+package com.github.creoii.creolib.world.surface;
 
 import com.github.creoii.creolib.util.WorldUtil;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;

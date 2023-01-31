@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.registry;
 
 import com.github.creoii.creolib.CreoLib;
-import com.github.creoii.creolib.world.surfacerule.FastNoiseThresholdMaterialCondition;
+import com.github.creoii.creolib.world.surface.FastNoiseThresholdMaterialCondition;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

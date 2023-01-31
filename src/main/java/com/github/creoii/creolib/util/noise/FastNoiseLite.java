@@ -227,7 +227,9 @@ public class FastNoiseLite {
     public FastNoiseLite() { }
 
     public static final Codec<FastNoiseLite> CODEC = RecordCodecBuilder.create(instance -> {
-        return instance.group(Codec.FLOAT.fieldOf("frequency").orElse(.01f).forGetter(fastNoiseLite -> {
+        return instance.group(Codec.INT.optionalFieldOf("seed", RANDOM.nextInt(Integer.MAX_VALUE)).forGetter(fastNoiseLite -> {
+            return fastNoiseLite.mSeed;
+        }), Codec.FLOAT.fieldOf("frequency").orElse(.01f).forGetter(fastNoiseLite -> {
             return fastNoiseLite.mFrequency;
         }), NoiseType.CODEC.fieldOf("noise_type").orElse(NoiseType.OpenSimplex2).forGetter(fastNoiseLite -> {
             return fastNoiseLite.mNoiseType;
@@ -258,13 +260,13 @@ public class FastNoiseLite {
         })).apply(instance, FastNoiseLite::new);
     });
 
-    public FastNoiseLite(
+    public FastNoiseLite(int seed,
             float frequency, NoiseType noiseType, RotationType3D rotationType3D,
             FractalType fractalType, int octaves, float lacunarity, float gain, float weightedStrength, float pingPongStrength,
             CellularDistanceFunction cellularDistanceFunction, CellularReturnType cellularReturnType, float cellularJitter,
             DomainWarpType domainWarpType, float domainWarpAmp
     ) {
-        SetSeed(RANDOM.nextInt(Integer.MAX_VALUE));
+        SetSeed(seed);
         SetFrequency(frequency);
         SetNoiseType(noiseType);
         SetRotationType3D(rotationType3D);
