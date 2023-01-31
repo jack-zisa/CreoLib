@@ -46,6 +46,7 @@ public class CBlockTags {
      * Silverfish Disturbers
      * Scares Hoglins
      * Anvil Softeners
+     * Sheep Eatable Blocks
      * Cocoa Placeable On
      * Sugar Placeable On
      * Cactus Placeable On

@@ -13,6 +13,7 @@ public class CreoLib implements ModInitializer {
         FeatureRegistry.register();
         PlacementRegistry.register();
         StructurePlacementTypeRegistry.register();
+        MaterialConditionRegistry.register();
         DensityFunctionTypeRegistry.register();
     }
 }
