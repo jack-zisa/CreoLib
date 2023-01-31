@@ -297,7 +297,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 1337
     /// </remarks>
-    public void SetSeed(int seed) { mSeed = seed; }
+    public FastNoiseLite SetSeed(int seed) {
+        mSeed = seed;
+        return this;
+    }
 
     /// <summary>
     /// Sets frequency for all noise types
@@ -305,7 +308,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 0.01
     /// </remarks>
-    public void SetFrequency(float frequency) { mFrequency = frequency; }
+    public FastNoiseLite SetFrequency(float frequency) {
+        mFrequency = frequency;
+        return this;
+    }
 
     /// <summary>
     /// Sets noise algorithm used for GetNoise(...)
@@ -313,10 +319,11 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: OpenSimplex2
     /// </remarks>
-    public void SetNoiseType(NoiseType noiseType)
+    public FastNoiseLite SetNoiseType(NoiseType noiseType)
     {
         mNoiseType = noiseType;
         UpdateTransformType3D();
+        return this;
     }
 
     /// <summary>
@@ -326,11 +333,12 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: None
     /// </remarks>
-    public void SetRotationType3D(RotationType3D rotationType3D)
+    public FastNoiseLite SetRotationType3D(RotationType3D rotationType3D)
     {
         mRotationType3D = rotationType3D;
         UpdateTransformType3D();
         UpdateWarpTransformType3D();
+        return this;
     }
 
     /// <summary>
@@ -340,7 +348,10 @@ public class FastNoiseLite {
     /// Default: None
     /// Note: FractalType.DomainWarp... only affects DomainWarp(...)
     /// </remarks>
-    public void SetFractalType(FractalType fractalType) { mFractalType = fractalType; }
+    public FastNoiseLite SetFractalType(FractalType fractalType) {
+        mFractalType = fractalType;
+        return this;
+    }
 
     /// <summary>
     /// Sets octave count for all fractal noise types 
@@ -348,10 +359,11 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 3
     /// </remarks>
-    public void SetFractalOctaves(int octaves)
+    public FastNoiseLite SetFractalOctaves(int octaves)
     {
         mOctaves = octaves;
         CalculateFractalBounding();
+        return this;
     }
 
     /// <summary>
@@ -360,7 +372,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 2.0
     /// </remarks>
-    public void SetFractalLacunarity(float lacunarity) { mLacunarity = lacunarity; }
+    public FastNoiseLite SetFractalLacunarity(float lacunarity) {
+        mLacunarity = lacunarity;
+        return this;
+    }
 
     /// <summary>
     /// Sets octave gain for all fractal noise types
@@ -368,10 +383,11 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 0.5
     /// </remarks>
-    public void SetFractalGain(float gain)
+    public FastNoiseLite SetFractalGain(float gain)
     {
         mGain = gain;
         CalculateFractalBounding();
+        return this;
     }
 
     /// <summary>
@@ -381,7 +397,10 @@ public class FastNoiseLite {
     /// Default: 0.0
     /// Note: Keep between 0...1 to maintain -1...1 output bounding
     /// </remarks>
-    public void SetFractalWeightedStrength(float weightedStrength) { mWeightedStrength = weightedStrength; }
+    public FastNoiseLite SetFractalWeightedStrength(float weightedStrength) {
+        mWeightedStrength = weightedStrength;
+        return this;
+    }
 
     /// <summary>
     /// Sets strength of the fractal ping pong effect
@@ -389,7 +408,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 2.0
     /// </remarks>
-    public void SetFractalPingPongStrength(float pingPongStrength) { mPingPongStrength = pingPongStrength; }
+    public FastNoiseLite SetFractalPingPongStrength(float pingPongStrength) {
+        mPingPongStrength = pingPongStrength;
+        return this;
+    }
 
 
     /// <summary>
@@ -398,7 +420,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: Distance
     /// </remarks>
-    public void SetCellularDistanceFunction(CellularDistanceFunction cellularDistanceFunction) { mCellularDistanceFunction = cellularDistanceFunction; }
+    public FastNoiseLite SetCellularDistanceFunction(CellularDistanceFunction cellularDistanceFunction) {
+        mCellularDistanceFunction = cellularDistanceFunction;
+        return this;
+    }
 
     /// <summary>
     /// Sets return type from cellular noise calculations
@@ -406,7 +431,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: EuclideanSq
     /// </remarks>
-    public void SetCellularReturnType(CellularReturnType cellularReturnType) { mCellularReturnType = cellularReturnType; }
+    public FastNoiseLite SetCellularReturnType(CellularReturnType cellularReturnType) {
+        mCellularReturnType = cellularReturnType;
+        return this;
+    }
 
     /// <summary>
     /// Sets the maximum distance a cellular point can move from it's grid position
@@ -415,7 +443,10 @@ public class FastNoiseLite {
     /// Default: 1.0
     /// Note: Setting this higher than 1 will cause artifacts
     /// </remarks> 
-    public void SetCellularJitter(float cellularJitter) { mCellularJitterModifier = cellularJitter; }
+    public FastNoiseLite SetCellularJitter(float cellularJitter) {
+        mCellularJitterModifier = cellularJitter;
+        return this;
+    }
 
 
     /// <summary>
@@ -424,10 +455,11 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: OpenSimplex2
     /// </remarks>
-    public void SetDomainWarpType(DomainWarpType domainWarpType)
+    public FastNoiseLite SetDomainWarpType(DomainWarpType domainWarpType)
     {
         mDomainWarpType = domainWarpType;
         UpdateWarpTransformType3D();
+        return this;
     }
 
 
@@ -437,7 +469,10 @@ public class FastNoiseLite {
     /// <remarks>
     /// Default: 1.0
     /// </remarks>
-    public void SetDomainWarpAmp(float domainWarpAmp) { mDomainWarpAmp = domainWarpAmp; }
+    public FastNoiseLite SetDomainWarpAmp(float domainWarpAmp) {
+        mDomainWarpAmp = domainWarpAmp;
+        return this;
+    }
 
 
     /// <summary>

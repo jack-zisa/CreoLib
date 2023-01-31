@@ -17,6 +17,9 @@
     ],
     "main": [
       "com.github.creoii.creolib.CreoLib"
+    ],
+    "fabric-datagen": [
+      "com.github.creoii.creolib.util.datagen.CreoDataGenerator"
     ]
   },
   "accessWidener": "creo_lib.accesswidener",

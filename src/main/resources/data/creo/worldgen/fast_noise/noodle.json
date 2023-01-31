@@ -1,0 +1,17 @@
+{
+  "cellular_distance_function": "euclidean_squared",
+  "cellular_jitter_modifier": 1.0,
+  "cellular_return_type": "distance",
+  "domain_warp_amp": 1.0,
+  "domain_warp_type": "open_simplex_2",
+  "fractal_type": "ping_pong",
+  "frequency": 0.01,
+  "gain": 0.0,
+  "lacunarity": 2.0,
+  "noise_type": "open_simplex_2s",
+  "octaves": 3,
+  "ping_pong_strength": 4.0,
+  "rotation_type_3d": "none",
+  "seed": 1337,
+  "weighted_strength": 0.0
+}

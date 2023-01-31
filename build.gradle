@@ -20,6 +20,16 @@ targetCompatibility = JavaVersion.VERSION_17
 
 loom {
     accessWidenerPath = file("src/main/resources/creo_lib.accesswidener")
+    runs {
+        datagenClient {
+            inherit client
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+            runDir "build/datagen"
+        }
+    }
 }
 
 dependencies {
@@ -27,6 +37,16 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
+    }
 }
 
 java {
