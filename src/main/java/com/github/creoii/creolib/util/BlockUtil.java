@@ -1,32 +1,31 @@
 package com.github.creoii.creolib.util;
 
 import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
-import com.github.creoii.creolib.util.registry.BlockRegistryHelper;
+import com.github.creoii.creolib.util.registry.CBlockSettings;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.sound.BlockSoundGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BlockUtil {
-    public static Map<Block, BlockRegistryHelper.CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
+    public static Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
 
-    public static BlockRegistryHelper.CBlockSettings getOrDefaultSettings(Block block) {
+    public static CBlockSettings getOrDefaultSettings(Block block) {
         if (BLOCK_SETTINGS_REPLACED.containsKey(block)) return BLOCK_SETTINGS_REPLACED.get(block);
         else {
-            BLOCK_SETTINGS_REPLACED.put(block, BlockRegistryHelper.CBlockSettings.toOverrideSettings(block));
-            return BlockRegistryHelper.CBlockSettings.toOverrideSettings(block);
+            BLOCK_SETTINGS_REPLACED.put(block, CBlockSettings.toOverrideSettings(block));
+            return CBlockSettings.toOverrideSettings(block);
         }
     }
 
     public static void setHardness(Block block, float hardness) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).hardness(hardness));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).hardness(hardness));
     }
 
     public static float getHardness(Block block) {
@@ -34,7 +33,7 @@ public class BlockUtil {
     }
 
     public static void setResistance(Block block, float resistance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).resistance(resistance));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).resistance(resistance));
     }
 
     public static float getResistance(Block block) {
@@ -42,11 +41,11 @@ public class BlockUtil {
     }
 
     public static void setStrength(Block block, float hardness, float resistance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).hardness(hardness).resistance(resistance));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).hardness(hardness).resistance(resistance));
     }
 
     public static void setSlipperiness(Block block, float slipperiness) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).slipperiness(slipperiness));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).slipperiness(slipperiness));
     }
 
     public static float getSlipperiness(Block block) {
@@ -54,7 +53,7 @@ public class BlockUtil {
     }
 
     public static void setVelocityMultiplier(Block block, float multiplier) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).velocityMultiplier(multiplier));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).velocityMultiplier(multiplier));
     }
 
     public static float getVelocityMultiplier(Block block) {
@@ -62,7 +61,7 @@ public class BlockUtil {
     }
 
     public static void setJumpVelocityMultiplier(Block block, float multiplier) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).jumpVelocityMultiplier(multiplier));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).jumpVelocityMultiplier(multiplier));
     }
 
     public static float getJumpVelocityMultiplier(Block block) {
@@ -70,7 +69,7 @@ public class BlockUtil {
     }
 
     public static void setSoundGroup(Block block, BlockSoundGroup soundGroup) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).sounds(soundGroup));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).sounds(soundGroup));
     }
 
     public static BlockSoundGroup getSoundGroup(Block block) {
@@ -78,7 +77,7 @@ public class BlockUtil {
     }
 
     public static void setLuminance(Block block, int luminance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).luminance(luminance));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).luminance(luminance));
     }
 
     public static int getLuminance(BlockState state) {
@@ -90,7 +89,7 @@ public class BlockUtil {
     }
 
     public static void setMapColor(Block block, MapColor color) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).mapColor(color));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).mapColor(color));
     }
 
     public static MapColor getMapColor(Block block) {
@@ -98,7 +97,7 @@ public class BlockUtil {
     }
 
     public static void setNoCollision(Block block) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).noCollision());
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).noCollision());
     }
 
     public static boolean isCollidable(Block block) {
@@ -106,7 +105,7 @@ public class BlockUtil {
     }
 
     public static void setToolRequired(Block block) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).requiresTool());
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).requiresTool());
     }
 
     public static boolean isToolRequired(Block block) {
@@ -118,7 +117,7 @@ public class BlockUtil {
     }
 
     public static void setEmissive(Block block, AbstractBlock.ContextPredicate emissive) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).emissiveLighting(emissive));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).emissiveLighting(emissive));
     }
 
     public static AbstractBlock.ContextPredicate isEmissive(Block block) {
@@ -130,7 +129,7 @@ public class BlockUtil {
     }
 
     public static void setPostProcessing(Block block, AbstractBlock.ContextPredicate postProcessing) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).postProcess(postProcessing));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).postProcess(postProcessing));
     }
 
     public static AbstractBlock.ContextPredicate hasPostProcessing(Block block) {
@@ -142,7 +141,7 @@ public class BlockUtil {
     }
 
     public static void setSuffocates(Block block, AbstractBlock.ContextPredicate suffocates) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).suffocates(suffocates));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).suffocates(suffocates));
     }
 
     public static AbstractBlock.ContextPredicate doesSuffocate(Block block) {
@@ -154,18 +153,18 @@ public class BlockUtil {
     }
 
     public static void setAllowsSpawning(Block block, AbstractBlock.TypedContextPredicate<EntityType<?>> allows) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (BlockRegistryHelper.CBlockSettings) getOrDefaultSettings(block).allowsSpawning(allows));
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).allowsSpawning(allows));
     }
 
     public static AbstractBlock.TypedContextPredicate<EntityType<?>> allowsSpawning(Block block) {
         return ((BlockSettingsAccessor) getOrDefaultSettings(block)).allowsSpawning();
     }
 
-    public static void setFireSettings(Block block, BlockRegistryHelper.CBlockSettings.FireSettings fireSettings) {
+    public static void setFireSettings(Block block, CBlockSettings.FireSettings fireSettings) {
         BLOCK_SETTINGS_REPLACED.replace(block, getOrDefaultSettings(block).fireSettings(fireSettings));
     }
 
-    public static BlockRegistryHelper.CBlockSettings.FireSettings getFireSettings(Block block) {
+    public static CBlockSettings.FireSettings getFireSettings(Block block) {
         return getOrDefaultSettings(block).getFireSettings();
     }
 

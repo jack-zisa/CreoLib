@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.mixin.item;
+package com.github.creoii.creolib.util.duck;
 
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.ApiStatus;

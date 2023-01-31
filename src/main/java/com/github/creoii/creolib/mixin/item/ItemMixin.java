@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.mixin.item;
 
 import com.github.creoii.creolib.util.CFoodComponent;
+import com.github.creoii.creolib.util.duck.ItemSettingsDuck;
 import com.github.creoii.creolib.util.registry.CItemSettings;
 import com.github.creoii.creolib.util.registry.ItemRegistryHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

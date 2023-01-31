@@ -4,15 +4,16 @@
   "package": "com.github.creoii.creolib.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockEntityTypeMixin",
     "block.AbstractBlockAccessor",
     "block.AbstractBlockStateMixin",
     "block.AnvilBlockMixin",
+    "block.BlockEntityTypeMixin",
     "block.BlockSettingsAccessor",
     "enchantment.EnchantmentMixin",
     "entity.LivingEntityMixin",
     "entity.PlayerEntityMixin",
     "item.ItemMixin",
+    "item.ItemSettingsAccessor",
     "item.ShearsItemMixin",
     "world.ServerWorldMixin"
   ],

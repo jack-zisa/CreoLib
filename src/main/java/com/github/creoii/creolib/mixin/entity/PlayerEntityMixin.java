@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.entity;
 
-import com.github.creoii.creolib.mixin.item.ItemSettingsDuck;
+import com.github.creoii.creolib.util.duck.ItemSettingsDuck;
 import com.github.creoii.creolib.util.registry.CItemSettings;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

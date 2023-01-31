@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "creo",
-  "version": "${version}",
+  "version": "0.0.1",
   "name": "Creo Lib",
   "description": "",
   "authors": [
@@ -24,7 +24,7 @@
     "creo-lib.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=",
-    "minecraft": ""
+    "fabricloader": ">=0.4.0",
+    "minecraft": "1.19.3"
   }
 }
