@@ -14,7 +14,9 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -47,7 +49,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void creo_lib_createNewAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY);
+        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY).add(AttributeRegistry.GENERIC_SWIM_SPEED);
     }
 
     @Inject(method = "knockDownwards", at = @At("HEAD"), cancellable = true)
@@ -78,8 +80,20 @@ public abstract class LivingEntityMixin extends Entity {
         return computeFallDamage(fallDistance * (float) (entity.getAttributeValue(AttributeRegistry.GENERIC_GRAVITY) * 12.5f), damageMultiplier);
     }
 
+    @Inject(method = "swimUpward", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_applyUpwardSwimSpeed(TagKey<Fluid> fluid, CallbackInfo ci) {
+        setVelocity(getVelocity().add(0.0D, 0.03999999910593033D * getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED), 0.0D));
+        ci.cancel();
+    }
+
+    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
+    private void creo_lib_applySwimSpeed(LivingEntity entity, float speed, Vec3d movementInput) {
+        speed *= this.getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED);
+        this.updateVelocity(speed, movementInput);
+    }
+
     @Inject(method = "onEquipStack", at = @At("TAIL"))
-    private void creo_caves_applyGravityEnchantments(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
+    private void creo_lib_applyGravityEnchantments(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
         Map<Enchantment, Integer> oldSet = EnchantmentHelper.get(oldStack);
         oldSet.keySet().forEach(enchantment -> {
             if (enchantment instanceof EquippableEnchantment equippableEnchantment) {
