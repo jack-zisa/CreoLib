@@ -1,9 +1,6 @@
 package com.github.creoii.creolib;
 
-import com.github.creoii.creolib.registry.AttributeRegistry;
-import com.github.creoii.creolib.registry.FeatureRegistry;
-import com.github.creoii.creolib.registry.PlacementRegistry;
-import com.github.creoii.creolib.registry.StructurePlacementTypeRegistry;
+import com.github.creoii.creolib.registry.*;
 import net.fabricmc.api.ModInitializer;
 
 public class CreoLib implements ModInitializer {
@@ -16,5 +13,6 @@ public class CreoLib implements ModInitializer {
         FeatureRegistry.register();
         PlacementRegistry.register();
         StructurePlacementTypeRegistry.register();
+        DensityFunctionTypeRegistry.register();
     }
 }
