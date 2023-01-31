@@ -21,20 +21,28 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
+        }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
+            return predicate.threeDimensional;
         })).and(buildCodec(instance)).apply(instance, FastNoiseStructurePlacement::new);
     });
     private final FastNoiseLite noise;
     private final List<WorldUtil.Range> ranges;
+    private final boolean threeDimensional;
 
-    public FastNoiseStructurePlacement(FastNoiseLite noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public FastNoiseStructurePlacement(FastNoiseLite noise, List<WorldUtil.Range> ranges, boolean threeDimensional, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;
+        this.threeDimensional = threeDimensional;
+    }
+
+    public FastNoiseStructurePlacement(FastNoiseLite noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+        this(noise, ranges, false, locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
     }
 
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
-        double noiseValue = noise.GetNoise(pos.getX(), pos.getY(), pos.getZ());
+        double noiseValue = threeDimensional ? noise.GetNoise(pos.getX(), pos.getY(), pos.getZ()) : noise.GetNoise(pos.getX(), 0f, pos.getZ());
         for (WorldUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;

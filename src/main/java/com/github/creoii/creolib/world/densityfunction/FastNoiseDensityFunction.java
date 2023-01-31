@@ -10,24 +10,30 @@ import net.minecraft.world.gen.densityfunction.DensityFunction;
 public class FastNoiseDensityFunction implements DensityFunction {
     public static final MapCodec<FastNoiseDensityFunction> NOISE_CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
-                (FastNoiseLite.CODEC.fieldOf("noise")).forGetter(FastNoiseDensityFunction::getNoise),
-                (Codec.DOUBLE.fieldOf("x_scale")).forGetter(FastNoiseDensityFunction::getXScale),
-                (Codec.DOUBLE.fieldOf("y_scale")).forGetter(FastNoiseDensityFunction::getYScale),
-                (Codec.DOUBLE.fieldOf("z_scale")).forGetter(FastNoiseDensityFunction::getZScale)
+                FastNoiseLite.CODEC.fieldOf("noise").forGetter(FastNoiseDensityFunction::getNoise),
+                Codec.DOUBLE.fieldOf("x_scale").forGetter(FastNoiseDensityFunction::getXScale),
+                Codec.DOUBLE.fieldOf("y_scale").forGetter(FastNoiseDensityFunction::getYScale),
+                Codec.DOUBLE.fieldOf("z_scale").forGetter(FastNoiseDensityFunction::getZScale),
+                Codec.BOOL.optionalFieldOf("3d", false).forGetter(FastNoiseDensityFunction::is3d)
         ).apply(instance, FastNoiseDensityFunction::new);
     });
     public static final CodecHolder<FastNoiseDensityFunction> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
-
     private final FastNoiseLite noise;
     private final double xScale;
     private final double yScale;
     private final double zScale;
+    private final boolean threeDimensional;
 
-    public FastNoiseDensityFunction(FastNoiseLite noise, double xScale, double yScale, double zScale) {
+    public FastNoiseDensityFunction(FastNoiseLite noise, double xScale, double yScale, double zScale, boolean threeDimensional) {
         this.noise = noise;
         this.xScale = xScale;
         this.yScale = yScale;
         this.zScale = zScale;
+        this.threeDimensional = threeDimensional;
+    }
+
+    public FastNoiseDensityFunction(FastNoiseLite noise, double xScale, double yScale, double zScale) {
+        this(noise, xScale, yScale, zScale, false);
     }
 
     @Override
@@ -42,7 +48,7 @@ public class FastNoiseDensityFunction implements DensityFunction {
 
     @Override
     public DensityFunction apply(DensityFunction.DensityFunctionVisitor visitor) {
-        return visitor.apply(new FastNoiseDensityFunction(noise, xScale, yScale, zScale));
+        return visitor.apply(new FastNoiseDensityFunction(noise, xScale, yScale, zScale, threeDimensional));
     }
 
     @Override
@@ -74,5 +80,9 @@ public class FastNoiseDensityFunction implements DensityFunction {
 
     public double getZScale() {
         return zScale;
+    }
+
+    public boolean is3d() {
+        return threeDimensional;
     }
 }

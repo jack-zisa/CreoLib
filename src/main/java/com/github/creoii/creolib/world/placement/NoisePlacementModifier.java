@@ -25,21 +25,29 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
+        }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
+            return predicate.threeDimensional;
         })).apply(instance, NoisePlacementModifier::new);
     });
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
     private final List<WorldUtil.Range> ranges;
+    private final boolean threeDimensional;
 
-    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
+    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, boolean threeDimensional) {
         this.noise = noise;
         this.ranges = ranges;
+        this.threeDimensional = threeDimensional;
+    }
+
+    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
+        this(noise, ranges, false);
     }
 
     @Override
     protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         if (context.getWorld().getChunkManager() instanceof ServerChunkManager chunkManager) {
             DoublePerlinNoiseSampler sampler = chunkManager.getNoiseConfig().getOrCreateSampler(noise);
-            double noiseValue = sampler.sample(pos.getX(), pos.getY(), pos.getZ());
+            double noiseValue = threeDimensional ? sampler.sample(pos.getX(), pos.getY(), pos.getZ()) : sampler.sample(pos.getX(), 0d, pos.getZ());
             for (WorldUtil.Range range : ranges) {
                 if (noiseValue >= range.min() && noiseValue < range.max()) {
                     return true;

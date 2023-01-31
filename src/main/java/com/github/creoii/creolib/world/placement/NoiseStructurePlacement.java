@@ -23,21 +23,29 @@ public class NoiseStructurePlacement extends StructurePlacement {
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
+        }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
+            return predicate.threeDimensional;
         })).and(buildCodec(instance)).apply(instance, NoiseStructurePlacement::new);
     });
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
     private final List<WorldUtil.Range> ranges;
+    private final boolean threeDimensional;
 
-    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, boolean threeDimensional, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;
+        this.threeDimensional = threeDimensional;
+    }
+
+    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+        this(noise, ranges, false, locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
     }
 
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
         DoublePerlinNoiseSampler sampler = calculator.getNoiseConfig().getOrCreateSampler(noise);
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
-        double noiseValue = sampler.sample(pos.getX(), 0d, pos.getZ());
+        double noiseValue = threeDimensional ? sampler.sample(pos.getX(), pos.getY(), pos.getZ()) : sampler.sample(pos.getX(), 0d, pos.getZ());
         for (WorldUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;

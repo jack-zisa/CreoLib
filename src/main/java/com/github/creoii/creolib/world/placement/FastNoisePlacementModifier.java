@@ -22,19 +22,27 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
+        }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
+            return predicate.threeDimensional;
         })).apply(instance, FastNoisePlacementModifier::new);
     });
     private final FastNoiseLite noise;
     private final List<WorldUtil.Range> ranges;
+    private final boolean threeDimensional;
 
-    public FastNoisePlacementModifier(FastNoiseLite noise, List<WorldUtil.Range> ranges) {
+    public FastNoisePlacementModifier(FastNoiseLite noise, List<WorldUtil.Range> ranges, boolean threeDimensional) {
         this.noise = noise;
         this.ranges = ranges;
+        this.threeDimensional = threeDimensional;
+    }
+
+    public FastNoisePlacementModifier(FastNoiseLite noise, List<WorldUtil.Range> ranges) {
+        this(noise, ranges, false);
     }
 
     @Override
     protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
-        double noiseValue = noise.GetNoise(pos.getX(), pos.getY(), pos.getZ());
+        double noiseValue = threeDimensional ? noise.GetNoise(pos.getX(), pos.getY(), pos.getZ()) : noise.GetNoise(pos.getX(), 0f, pos.getZ());
         for (WorldUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;
