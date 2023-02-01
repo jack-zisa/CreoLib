@@ -55,12 +55,12 @@ public class FastNoiseDensityFunction implements DensityFunction {
 
     @Override
     public double minValue() {
-        return -1d;
+        return -2d;
     }
 
     @Override
     public double maxValue() {
-        return 1d;
+        return 2d;
     }
 
     @Override
