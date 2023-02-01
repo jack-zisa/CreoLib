@@ -28,7 +28,7 @@ public class CompositePlacementModifier extends AbstractConditionalPlacementModi
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         boolean generated = false;
         for (PlacementModifier modifier : modifiers) {
             if (modifier instanceof AbstractConditionalPlacementModifier conditionalPlacementModifier) {

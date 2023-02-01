@@ -43,7 +43,7 @@ public class NearStructurePlacementModifier extends AbstractConditionalPlacement
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         if (context.getWorld() instanceof ServerWorld serverWorld) {
             Pair<BlockPos, RegistryEntry<Structure>> locatePair = context.getChunkGenerator().locateStructure(serverWorld, structures, pos, searchRadius, false);
             if (locatePair != null) {

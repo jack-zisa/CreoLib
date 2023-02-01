@@ -43,7 +43,7 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         double noiseValue = threeDimensional ? noise.value().GetNoise(pos.getX(), pos.getY(), pos.getZ()) : noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
         for (WorldUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {

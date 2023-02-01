@@ -12,7 +12,7 @@ public class SkyVisiblePlacementModifier extends AbstractConditionalPlacementMod
     public static Codec<SkyVisiblePlacementModifier> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         return context.getWorld().isSkyVisible(pos);
     }
 

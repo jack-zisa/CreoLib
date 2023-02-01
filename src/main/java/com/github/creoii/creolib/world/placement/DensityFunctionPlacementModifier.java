@@ -31,7 +31,7 @@ public class DensityFunctionPlacementModifier extends AbstractConditionalPlaceme
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         double value = densityFunction.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
         for (WorldUtil.Range range : ranges) {
             if (value >= range.min() && value < range.max()) {

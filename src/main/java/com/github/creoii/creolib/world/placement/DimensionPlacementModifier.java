@@ -26,7 +26,7 @@ public class DimensionPlacementModifier extends AbstractConditionalPlacementModi
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         if (dimensionType.hasKeyAndValue()) {
             return context.getWorld().getDimension() == dimensionType.value();
         } return false;

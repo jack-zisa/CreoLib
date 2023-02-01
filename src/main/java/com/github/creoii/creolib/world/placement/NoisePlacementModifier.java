@@ -44,7 +44,7 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         if (context.getWorld().getChunkManager() instanceof ServerChunkManager chunkManager) {
             DoublePerlinNoiseSampler sampler = chunkManager.getNoiseConfig().getOrCreateSampler(noise);
             double noiseValue = threeDimensional ? sampler.sample(pos.getX(), pos.getY(), pos.getZ()) : sampler.sample(pos.getX(), 0d, pos.getZ());

@@ -28,7 +28,7 @@ public class SteepPlacementModifier extends AbstractConditionalPlacementModifier
     }
 
     @Override
-    protected boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         int i = pos.getX() & 0xf;
         int j = pos.getZ() & 0xf;
         int k = Math.max(j - 1, 0);
