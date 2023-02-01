@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.PlacementModifierRegistry;
+import com.github.creoii.creolib.util.Untested;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -16,6 +17,7 @@ import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementMod
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import net.minecraft.world.gen.structure.Structure;
 
+@Untested("Structures generate after features")
 public class NearStructurePlacementModifier extends AbstractConditionalPlacementModifier {
     public static final Codec<NearStructurePlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(RegistryCodecs.entryList(RegistryKeys.STRUCTURE).fieldOf("structure").forGetter(placement -> {
