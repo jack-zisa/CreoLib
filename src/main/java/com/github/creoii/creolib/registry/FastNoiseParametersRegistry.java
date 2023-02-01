@@ -2,17 +2,21 @@ package com.github.creoii.creolib.registry;
 
 import com.github.creoii.creolib.CreoLib;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
+import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryElementCodec;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
 public class FastNoiseParametersRegistry extends FabricDynamicRegistryProvider {
     public static final RegistryKey<Registry<FastNoiseLite>> FAST_NOISE_SETTINGS = RegistryKey.ofRegistry(new Identifier(CreoLib.NAMESPACE, "worldgen/fast_noise"));
+    public static final Codec<RegistryEntry<FastNoiseLite>> REGISTRY_CODEC = RegistryElementCodec.of(FAST_NOISE_SETTINGS, FastNoiseLite.CODEC);
 
     public FastNoiseParametersRegistry(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);

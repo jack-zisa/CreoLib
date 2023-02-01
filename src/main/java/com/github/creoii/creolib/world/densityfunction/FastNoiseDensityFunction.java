@@ -1,16 +1,18 @@
 package com.github.creoii.creolib.world.densityfunction;
 
+import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public class FastNoiseDensityFunction implements DensityFunction {
     public static final MapCodec<FastNoiseDensityFunction> NOISE_CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
-                FastNoiseLite.CODEC.fieldOf("noise").forGetter(FastNoiseDensityFunction::getNoise),
+                FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(FastNoiseDensityFunction::getNoise),
                 Codec.DOUBLE.fieldOf("x_scale").forGetter(FastNoiseDensityFunction::getXScale),
                 Codec.DOUBLE.fieldOf("y_scale").forGetter(FastNoiseDensityFunction::getYScale),
                 Codec.DOUBLE.fieldOf("z_scale").forGetter(FastNoiseDensityFunction::getZScale),
@@ -18,13 +20,13 @@ public class FastNoiseDensityFunction implements DensityFunction {
         ).apply(instance, FastNoiseDensityFunction::new);
     });
     public static final CodecHolder<FastNoiseDensityFunction> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
-    private final FastNoiseLite noise;
+    private final RegistryEntry<FastNoiseLite> noise;
     private final double xScale;
     private final double yScale;
     private final double zScale;
     private final boolean threeDimensional;
 
-    public FastNoiseDensityFunction(FastNoiseLite noise, double xScale, double yScale, double zScale, boolean threeDimensional) {
+    public FastNoiseDensityFunction(RegistryEntry<FastNoiseLite> noise, double xScale, double yScale, double zScale, boolean threeDimensional) {
         this.noise = noise;
         this.xScale = xScale;
         this.yScale = yScale;
@@ -32,13 +34,13 @@ public class FastNoiseDensityFunction implements DensityFunction {
         this.threeDimensional = threeDimensional;
     }
 
-    public FastNoiseDensityFunction(FastNoiseLite noise, double xScale, double yScale, double zScale) {
+    public FastNoiseDensityFunction(RegistryEntry<FastNoiseLite> noise, double xScale, double yScale, double zScale) {
         this(noise, xScale, yScale, zScale, false);
     }
 
     @Override
     public double sample(DensityFunction.NoisePos pos) {
-        return noise.GetNoise((float) (pos.blockX() * xScale), (float) (pos.blockY() * yScale), (float) (pos.blockZ() * zScale));
+        return noise.value().GetNoise((float) (pos.blockX() * xScale), (float) (pos.blockY() * yScale), (float) (pos.blockZ() * zScale));
     }
 
     @Override
@@ -66,7 +68,7 @@ public class FastNoiseDensityFunction implements DensityFunction {
         return CODEC_HOLDER;
     }
 
-    public FastNoiseLite getNoise() {
+    public RegistryEntry<FastNoiseLite> getNoise() {
         return noise;
     }
 
