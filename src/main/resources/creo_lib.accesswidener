@@ -4,6 +4,7 @@ accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$BooleanSup
 
 accessible method net/minecraft/item/FoodComponent <init> (IFZZZLjava/util/List;)V
 accessible method net/minecraft/world/gen/chunk/placement/StructurePlacement buildCodec (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P5;
+accessible method net/minecraft/world/gen/placementmodifier/AbstractConditionalPlacementModifier shouldPlace (Lnet/minecraft/world/gen/feature/FeaturePlacementContext;Lnet/minecraft/util/math/random/Random;Lnet/minecraft/util/math/BlockPos;)Z
 
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockX I
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockY I

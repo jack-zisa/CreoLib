@@ -14,6 +14,9 @@ public class PlacementModifierRegistry {
     public static final PlacementModifierType<DimensionPlacementModifier> DIMENSION = () -> DimensionPlacementModifier.CODEC;
     public static final PlacementModifierType<OffsetPlacementModifier> OFFSET = () -> OffsetPlacementModifier.CODEC;
     public static final PlacementModifierType<DensityFunctionPlacementModifier> DENSITY_FUNCTION = () -> DensityFunctionPlacementModifier.CODEC;
+    public static final PlacementModifierType<NearStructurePlacementModifier> NEAR_STRUCTURE = () -> NearStructurePlacementModifier.CODEC;
+    public static final PlacementModifierType<SkyVisiblePlacementModifier> SKY_VISIBLE = () -> SkyVisiblePlacementModifier.CODEC;
+    public static final PlacementModifierType<CompositePlacementModifier> COMPOSITE = () -> CompositePlacementModifier.CODEC;
 
     public static void register() {
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "noise"), NOISE);
@@ -22,5 +25,8 @@ public class PlacementModifierRegistry {
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "dimension"), DIMENSION);
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "offset"), OFFSET);
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "density_function"), DENSITY_FUNCTION);
+        Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "near_structure"), NEAR_STRUCTURE);
+        Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "sky_visible"), SKY_VISIBLE);
+        Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "composite"), COMPOSITE);
     }
 }
