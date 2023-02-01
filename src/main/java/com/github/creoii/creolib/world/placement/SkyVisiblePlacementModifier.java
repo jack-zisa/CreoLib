@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.world.placement;
 
+import com.github.creoii.creolib.registry.PlacementModifierRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -18,6 +19,6 @@ public class SkyVisiblePlacementModifier extends AbstractConditionalPlacementMod
 
     @Override
     public PlacementModifierType<?> getType() {
-        return null;
+        return PlacementModifierRegistry.SKY_VISIBLE;
     }
 }

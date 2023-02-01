@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.world.placement;
 
+import com.github.creoii.creolib.registry.PlacementModifierRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
@@ -42,6 +43,6 @@ public class CompositePlacementModifier extends AbstractConditionalPlacementModi
 
     @Override
     public PlacementModifierType<?> getType() {
-        return null;
+        return PlacementModifierRegistry.COMPOSITE;
     }
 }
