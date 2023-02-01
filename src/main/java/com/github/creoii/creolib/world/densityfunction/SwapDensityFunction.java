@@ -1,13 +1,13 @@
 package com.github.creoii.creolib.world.densityfunction;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public record SwapDensityFunction(DensityFunction input, SwapType swapType) implements DensityFunction {
-    public static final MapCodec<SwapDensityFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+    public static final Codec<SwapDensityFunction> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(
                 DensityFunction.CODEC.fieldOf("input").forGetter(SwapDensityFunction::input),
                 SwapType.CODEC.fieldOf("swap_type").forGetter(SwapDensityFunction::swapType)

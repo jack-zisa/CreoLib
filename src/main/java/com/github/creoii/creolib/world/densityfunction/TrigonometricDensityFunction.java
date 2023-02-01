@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.world.densityfunction;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.StringIdentifiable;
@@ -80,7 +81,7 @@ public abstract class TrigonometricDensityFunction implements DensityFunction {
     }
 
     public static class Sin extends TrigonometricDensityFunction {
-        public static final MapCodec<Sin> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+        public static final Codec<Sin> CODEC = RecordCodecBuilder.create(instance -> {
             return instance.group(
                     DensityFunction.CODEC.fieldOf("input").forGetter(Sin::getInput)
             ).apply(instance, Sin::new);
@@ -103,7 +104,7 @@ public abstract class TrigonometricDensityFunction implements DensityFunction {
     }
 
     public static class Cos extends TrigonometricDensityFunction {
-        public static final MapCodec<Cos> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+        public static final Codec<Cos> CODEC = RecordCodecBuilder.create(instance -> {
             return instance.group(
                     DensityFunction.CODEC.fieldOf("input").forGetter(Cos::getInput)
             ).apply(instance, Cos::new);
@@ -126,7 +127,7 @@ public abstract class TrigonometricDensityFunction implements DensityFunction {
     }
 
     public static class Tan extends TrigonometricDensityFunction {
-        public static final MapCodec<Tan> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+        public static final Codec<Tan> CODEC = RecordCodecBuilder.create(instance -> {
             return instance.group(
                     DensityFunction.CODEC.fieldOf("input").forGetter(Tan::getInput)
             ).apply(instance, Tan::new);

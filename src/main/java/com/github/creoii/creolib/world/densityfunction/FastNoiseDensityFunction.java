@@ -3,14 +3,13 @@ package com.github.creoii.creolib.world.densityfunction;
 import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public class FastNoiseDensityFunction implements DensityFunction {
-    public static final MapCodec<FastNoiseDensityFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+    public static final Codec<FastNoiseDensityFunction> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(
                 FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(FastNoiseDensityFunction::getNoise),
                 Codec.DOUBLE.fieldOf("x_scale").forGetter(FastNoiseDensityFunction::getXScale),
