@@ -7,19 +7,19 @@ import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public record SwapDensityFunction(DensityFunction input, SwapType swapType) implements DensityFunction {
-    public static final MapCodec<SwapDensityFunction> NOISE_CODEC = RecordCodecBuilder.mapCodec(instance -> {
+    public static final MapCodec<SwapDensityFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 DensityFunction.CODEC.fieldOf("input").forGetter(SwapDensityFunction::input),
                 SwapType.CODEC.fieldOf("swap_type").forGetter(SwapDensityFunction::swapType)
         ).apply(instance, SwapDensityFunction::new);
     });
-    public static final CodecHolder<SwapDensityFunction> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
+    public static final CodecHolder<SwapDensityFunction> CODEC_HOLDER = CodecHolder.of(CODEC);
 
     @Override
     public double sample(NoisePos pos) {
-        double x = 0;
-        double y = 0;
-        double z = 0;
+        int x = 0;
+        int y = 0;
+        int z = 0;
         switch (swapType) {
             case X_AND_Y -> {
                 x = pos.blockY();
@@ -37,7 +37,7 @@ public record SwapDensityFunction(DensityFunction input, SwapType swapType) impl
                 z = pos.blockY();
             }
         }
-        return input.sample(new UnblendedNoisePos((int) x, (int) y, (int) z));
+        return input.sample(new UnblendedNoisePos(x, y, z));
     }
 
     @Override

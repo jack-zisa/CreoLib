@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.world.placement;
 
-import com.github.creoii.creolib.registry.PlacementRegistry;
+import com.github.creoii.creolib.registry.PlacementModifierRegistry;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -59,6 +59,6 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
 
     @Override
     public PlacementModifierType<?> getType() {
-        return PlacementRegistry.NOISE;
+        return PlacementModifierRegistry.NOISE;
     }
 }

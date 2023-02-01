@@ -13,14 +13,14 @@ import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import java.util.List;
 
 public class FastNoiseThresholdMaterialCondition implements MaterialRules.MaterialCondition {
-    public static final MapCodec<FastNoiseThresholdMaterialCondition> NOISE_CODEC = RecordCodecBuilder.mapCodec(instance -> {
+    public static final MapCodec<FastNoiseThresholdMaterialCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(FastNoiseThresholdMaterialCondition::getNoise),
                 WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(FastNoiseThresholdMaterialCondition::getRanges),
                 Codec.BOOL.optionalFieldOf("3d", false).forGetter(FastNoiseThresholdMaterialCondition::is3d)
         ).apply(instance, FastNoiseThresholdMaterialCondition::new);
     });
-    public static final CodecHolder<FastNoiseThresholdMaterialCondition> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
+    public static final CodecHolder<FastNoiseThresholdMaterialCondition> CODEC_HOLDER = CodecHolder.of(CODEC);
     private final RegistryEntry<FastNoiseLite> noise;
     private final List<WorldUtil.Range> ranges;
     private final boolean threeDimensional;

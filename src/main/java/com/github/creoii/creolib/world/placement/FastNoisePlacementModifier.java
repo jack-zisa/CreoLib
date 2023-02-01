@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
-import com.github.creoii.creolib.registry.PlacementRegistry;
+import com.github.creoii.creolib.registry.PlacementModifierRegistry;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
@@ -55,6 +55,6 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
 
     @Override
     public PlacementModifierType<?> getType() {
-        return PlacementRegistry.FAST_NOISE;
+        return PlacementModifierRegistry.FAST_NOISE;
     }
 }

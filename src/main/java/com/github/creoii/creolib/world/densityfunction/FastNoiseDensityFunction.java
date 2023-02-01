@@ -10,7 +10,7 @@ import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public class FastNoiseDensityFunction implements DensityFunction {
-    public static final MapCodec<FastNoiseDensityFunction> NOISE_CODEC = RecordCodecBuilder.mapCodec(instance -> {
+    public static final MapCodec<FastNoiseDensityFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(FastNoiseDensityFunction::getNoise),
                 Codec.DOUBLE.fieldOf("x_scale").forGetter(FastNoiseDensityFunction::getXScale),
@@ -19,7 +19,7 @@ public class FastNoiseDensityFunction implements DensityFunction {
                 Codec.BOOL.optionalFieldOf("3d", false).forGetter(FastNoiseDensityFunction::is3d)
         ).apply(instance, FastNoiseDensityFunction::new);
     });
-    public static final CodecHolder<FastNoiseDensityFunction> CODEC_HOLDER = CodecHolder.of(NOISE_CODEC);
+    public static final CodecHolder<FastNoiseDensityFunction> CODEC_HOLDER = CodecHolder.of(CODEC);
     private final RegistryEntry<FastNoiseLite> noise;
     private final double xScale;
     private final double yScale;
