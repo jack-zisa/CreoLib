@@ -1,7 +1,6 @@
 package com.github.creoii.creolib.world.densityfunction;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.dynamic.CodecHolder;

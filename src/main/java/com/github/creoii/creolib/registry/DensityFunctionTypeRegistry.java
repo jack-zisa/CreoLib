@@ -17,5 +17,7 @@ public class DensityFunctionTypeRegistry {
         Registry.register(Registries.DENSITY_FUNCTION_TYPE, new Identifier(CreoLib.NAMESPACE, "y_coord"), CoordinateDensityFunction.GetY.CODEC);
         Registry.register(Registries.DENSITY_FUNCTION_TYPE, new Identifier(CreoLib.NAMESPACE, "z_coord"), CoordinateDensityFunction.GetZ.CODEC);
         Registry.register(Registries.DENSITY_FUNCTION_TYPE, new Identifier(CreoLib.NAMESPACE, "random"), RandomDensityFunction.CODEC);
+        Registry.register(Registries.DENSITY_FUNCTION_TYPE, new Identifier(CreoLib.NAMESPACE, "x_clamped_gradient"), XClampedGradientDensityFunction.CODEC);
+        Registry.register(Registries.DENSITY_FUNCTION_TYPE, new Identifier(CreoLib.NAMESPACE, "z_clamped_gradient"), ZClampedGradientDensityFunction.CODEC);
     }
 }
