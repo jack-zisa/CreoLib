@@ -23,7 +23,7 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
-        }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
+        }), Codec.BOOL.fieldOf("3d").orElse(false).forGetter(predicate -> {
             return predicate.threeDimensional;
         })).and(buildCodec(instance)).apply(instance, FastNoiseStructurePlacement::new);
     });
@@ -36,10 +36,6 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
         this.noise = noise;
         this.ranges = ranges;
         this.threeDimensional = threeDimensional;
-    }
-
-    public FastNoiseStructurePlacement(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
-        this(noise, ranges, false, locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
     }
 
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
@@ -59,6 +55,6 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
     }
 
     public StructurePlacementType<?> getType() {
-        return StructurePlacementTypeRegistry.FIXED;
+        return StructurePlacementTypeRegistry.FAST_NOISE;
     }
 }
