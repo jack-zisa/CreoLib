@@ -20,6 +20,7 @@ public class BlockRegistryHelper {
             StrippableBlockRegistry.register(block, settings.getStrippedBlock());
             FlattenableBlockRegistry.register(block, settings.getFlattenedState());
             OxidizableBlocksRegistry.registerWaxableBlockPair(block, settings.getWaxed());
+            OxidizableBlocksRegistry.registerOxidizableBlockPair(block, settings.getOxidized());
             LandPathNodeTypesRegistry.PathNodeTypeProvider provider = settings.getPathNodeProvider();
             if (provider instanceof LandPathNodeTypesRegistry.DynamicPathNodeTypeProvider dynamic) {
                 LandPathNodeTypesRegistry.registerDynamic(block, dynamic);

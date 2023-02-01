@@ -14,6 +14,7 @@ public class CBlockSettings extends FabricBlockSettings {
     private BlockState flattenedState;
     private LandPathNodeTypesRegistry.PathNodeTypeProvider pathNodeProvider;
     private Block waxed;
+    private Block oxidized;
 
     public CBlockSettings(Material material, MapColor color) {
         super(material, color);
@@ -46,6 +47,7 @@ public class CBlockSettings extends FabricBlockSettings {
             settings.dynamicPathNode((LandPathNodeTypesRegistry.DynamicPathNodeTypeProvider) provider);
         }
         settings.waxedBlock(HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().get(block));
+        settings.oxidizedBlock(Oxidizable.OXIDATION_LEVEL_INCREASES.get().get(block));
         return settings;
     }
 
@@ -79,6 +81,11 @@ public class CBlockSettings extends FabricBlockSettings {
         return this;
     }
 
+    public CBlockSettings oxidizedBlock(Block oxidized) {
+        this.oxidized = oxidized;
+        return this;
+    }
+
     public FireSettings getFireSettings() {
         return fireSettings;
     }
@@ -97,6 +104,10 @@ public class CBlockSettings extends FabricBlockSettings {
 
     public Block getWaxed() {
         return waxed;
+    }
+
+    public Block getOxidized() {
+        return oxidized;
     }
 
     public record FireSettings(int burnChance, int spreadChance) {}
