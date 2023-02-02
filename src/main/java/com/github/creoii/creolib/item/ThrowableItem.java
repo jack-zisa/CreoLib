@@ -46,40 +46,4 @@ public class ThrowableItem extends Item {
 
         return TypedActionResult.success(held, world.isClient());
     }
-
-    public static class Builder {
-        private final FabricItemSettings settings;
-        private SoundEvent throwSound;
-        private EntityType<ThrownItemEntity> entityType;
-        private float speed;
-        private float divergence;
-
-        public Builder(FabricItemSettings settings) {
-            this.settings = settings;
-        }
-
-        public Builder throwSound(SoundEvent throwSound) {
-            this.throwSound = throwSound;
-            return this;
-        }
-
-        public Builder entityType(EntityType<ThrownItemEntity> entityType) {
-            this.entityType = entityType;
-            return this;
-        }
-
-        public Builder speed(float speed) {
-            this.speed = speed;
-            return this;
-        }
-
-        public Builder divergence(float divergence) {
-            this.divergence = divergence;
-            return this;
-        }
-
-        public ThrowableItem build() {
-            return new ThrowableItem(settings, throwSound, entityType, speed, divergence);
-        }
-    }
 }
