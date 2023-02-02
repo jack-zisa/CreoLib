@@ -12,7 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 
 public class CreoLib implements ModInitializer {
     public static final String NAMESPACE = "creo";
-    public static final String COMMON_NAMESPACE = "c";
+    public static final String COMMON = "c";
 
     @Override
     public void onInitialize() {

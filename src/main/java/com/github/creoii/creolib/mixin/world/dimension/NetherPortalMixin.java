@@ -16,7 +16,7 @@ public class NetherPortalMixin {
 
     static {
         IS_VALID_FRAME_BLOCK = (state, world, pos) -> {
-            return state.isIn(CBlockTags.NETHER_PORTAL_BASE_BLOCKS) || state.isOf(Blocks.OBSIDIAN);
+            return state.isIn(CBlockTags.NETHER_PORTAL_FRAME_BASE_BLOCKS) || state.isOf(Blocks.OBSIDIAN);
         };
     }
 }

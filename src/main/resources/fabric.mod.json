@@ -12,9 +12,6 @@
   "icon": "assets/creo_lib/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "com.github.creoii.creolib.client.CreoLibClient"
-    ],
     "main": [
       "com.github.creoii.creolib.CreoLib"
     ],

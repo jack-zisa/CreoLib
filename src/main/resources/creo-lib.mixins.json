@@ -6,6 +6,7 @@
   "mixins": [
     "block.AbstractBlockAccessor",
     "block.AbstractBlockStateMixin",
+    "block.AbstractFireBlockMixin",
     "block.AnvilBlockMixin",
     "block.BlockEntityTypeMixin",
     "block.BlockSettingsAccessor",
