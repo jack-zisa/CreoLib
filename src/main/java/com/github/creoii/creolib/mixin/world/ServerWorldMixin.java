@@ -1,12 +1,16 @@
 package com.github.creoii.creolib.mixin.world;
 
+import com.github.creoii.creolib.tag.CBlockTags;
 import com.github.creoii.creolib.util.Tickable;
 import com.github.creoii.creolib.world.ServerWorldTicker;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.BooleanSupplier;
@@ -21,5 +25,10 @@ public class ServerWorldMixin {
         Tickable.TICKERS.forEach(tickable -> {
             tickable.tick((World) (Object) this);
         });
+    }
+
+    @Redirect(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 0))
+    private boolean creo_lib_lightningAttractors(BlockState instance, Block block) {
+        return instance.isIn(CBlockTags.ATTRACTS_LIGHTNING);
     }
 }

@@ -17,7 +17,7 @@ public class DistanceFromZeroStructurePlacement extends StructurePlacement {
     public static final Codec<DistanceFromZeroStructurePlacement> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(Codec.INT.fieldOf("min_squared_distance").forGetter(predicate -> {
             return predicate.minSquaredDistance;
-        }), Codec.FLOAT.fieldOf("chance").orElse(1f).forGetter(predicate -> {
+        }), Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(predicate -> {
             return predicate.chance;
         })).and(buildCodec(instance)).apply(instance, DistanceFromZeroStructurePlacement::new);
     });

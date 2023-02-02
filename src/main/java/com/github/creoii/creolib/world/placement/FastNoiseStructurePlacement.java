@@ -10,6 +10,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.chunk.placement.StructurePlacement;
 import net.minecraft.world.gen.chunk.placement.StructurePlacementCalculator;
 import net.minecraft.world.gen.chunk.placement.StructurePlacementType;
@@ -18,29 +19,31 @@ import java.util.List;
 import java.util.Optional;
 
 public class FastNoiseStructurePlacement extends StructurePlacement {
+    private static final Random RANDOM = Random.create();
     public static final Codec<FastNoiseStructurePlacement> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(predicate -> {
             return predicate.noise;
         }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
-        }), Codec.BOOL.fieldOf("3d").orElse(false).forGetter(predicate -> {
-            return predicate.threeDimensional;
+        }), Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(predicate -> {
+            return predicate.chance;
         })).and(buildCodec(instance)).apply(instance, FastNoiseStructurePlacement::new);
     });
     private final RegistryEntry<FastNoiseLite> noise;
     private final List<WorldUtil.Range> ranges;
-    private final boolean threeDimensional;
+    private final float chance;
 
-    public FastNoiseStructurePlacement(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges, boolean threeDimensional, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public FastNoiseStructurePlacement(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges, float chance, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;
-        this.threeDimensional = threeDimensional;
+        this.chance = chance;
     }
 
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
+        if (RANDOM.nextFloat() > chance) return false;
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
-        double noiseValue = threeDimensional ? noise.value().GetNoise(pos.getX(), pos.getY(), pos.getZ()) : noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
+        double noiseValue = noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
         for (WorldUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;

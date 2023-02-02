@@ -46,7 +46,7 @@ public class NearStructurePlacementModifier extends AbstractConditionalPlacement
     @Override
     public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         StructureWorldAccess world = context.getWorld();
-        // we can't access StructureAccessor on the client
+        // can't access StructureAccessor on the client
         if (!world.isClient()) {
             MutableBoolean place = new MutableBoolean(false);
 
@@ -56,7 +56,10 @@ public class NearStructurePlacementModifier extends AbstractConditionalPlacement
                     if (entry.hasKeyAndValue()) {
                         StructurePresence structurePresence = world.toServerWorld().getStructureAccessor().getStructurePresence(chunkPos, entry.value(), false);
                         if (structurePresence == StructurePresence.START_PRESENT) {
-                            place.setValue(chunkPos.getCenterAtY(pos.getY()).getSquaredDistance(pos) <= squaredDistance);
+                            if (chunkPos.getCenterAtY(pos.getY()).getSquaredDistance(pos) <= squaredDistance) {
+                                place.setTrue();
+                                break;
+                            }
                         }
                     }
                 }
