@@ -14,6 +14,7 @@ public class RegistrySets {
     /**
      * Registers most blocks required in a wood set.
      *      Does not register signs, leaves, saplings, or boats.
+     *      This is only for generic wood types, any special properties require normal registration.
      *
      * @param namespace - The namespace of your mod, used for ids.
      * @param name - The name of the wood type, used for ids.
@@ -94,6 +95,14 @@ public class RegistrySets {
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_trapdoor"), trapdoor, ItemGroups.BUILDING_BLOCKS);
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_pressure_plate"), pressurePlate, ItemGroups.BUILDING_BLOCKS);
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_button"), button, ItemGroups.BUILDING_BLOCKS);
+            }
+        }
+    }
+
+    public record StoneSet(String namespace, String name, @Nullable ItemConvertible after, @Nullable ItemConvertible stoneAfter, @Nullable Block stone, Block stairs, Block slab, Block wall, @Nullable Block cobbled, @Nullable Block cobbledStairs, @Nullable Block cobbledSlab, @Nullable Block cobbledWall, @Nullable Block bricks, @Nullable Block brickStairs, @Nullable Block brickSlab, @Nullable Block brickWall, @Nullable Block tiles, @Nullable Block tileStairs, @Nullable Block tileSlab, @Nullable Block tileWall, @Nullable Block polished, @Nullable Block chiseled, @Nullable Block pillar) {
+        public void register() {
+            if (after != null) {
+            } else {
             }
         }
     }

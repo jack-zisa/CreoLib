@@ -1,6 +1,8 @@
 package com.github.creoii.creolib.mixin.enchantment;
 
+import com.github.creoii.creolib.tag.CEnchantmentTags;
 import com.github.creoii.creolib.util.AllowEnchantments;
+import com.github.creoii.creolib.util.TagUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,5 +17,25 @@ public class EnchantmentMixin {
         if (stack.getItem() instanceof AllowEnchantments allowEnchantments) {
             cir.setReturnValue(allowEnchantments.getAllowedEnchantments().test((Enchantment) (Object) this));
         }
+    }
+
+    @Inject(method = "isAvailableForEnchantedBookOffer", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_offeredByLibrarians(CallbackInfoReturnable<Boolean> cir) {
+        if (TagUtil.isEnchantmentIn((Enchantment) (Object) this, CEnchantmentTags.NOT_OFFERED_BY_LIBRARIANS)) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "isAvailableForRandomSelection", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_notRandomlySelectable(CallbackInfoReturnable<Boolean> cir) {
+        if (TagUtil.isEnchantmentIn((Enchantment) (Object) this, CEnchantmentTags.NOT_RANDOMLY_SELECTABLE)) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "isCursed", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_curses(CallbackInfoReturnable<Boolean> cir) {
+        if (TagUtil.isEnchantmentIn((Enchantment) (Object) this, CEnchantmentTags.CURSED)) cir.setReturnValue(true);
+    }
+
+    @Inject(method = "isTreasure", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_treasureEnchantments(CallbackInfoReturnable<Boolean> cir) {
+        if (TagUtil.isEnchantmentIn((Enchantment) (Object) this, CEnchantmentTags.TREASURE)) cir.setReturnValue(true);
     }
 }

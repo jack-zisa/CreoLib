@@ -9,3 +9,4 @@ accessible method net/minecraft/world/gen/placementmodifier/AbstractConditionalP
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockX I
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockY I
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockZ I
+accessible field net/minecraft/screen/GrindstoneScreenHandler input Lnet/minecraft/inventory/Inventory;

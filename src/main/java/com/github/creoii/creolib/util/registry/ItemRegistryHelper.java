@@ -10,6 +10,13 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemRegistryHelper {
+    /**
+     * Register an item
+     * Optionally, add the item to an itemgroup after an item
+     *
+     * @param after - The Item or Block to add after
+     * @param group - The ItemGroup to add to
+     */
     public static void registerItem(Identifier id, Item item, @Nullable ItemConvertible after, @Nullable ItemGroup group) {
         Registry.register(Registries.ITEM, id, item);
         if (group != null) {
@@ -21,6 +28,11 @@ public class ItemRegistryHelper {
         }
     }
 
+    /**
+     * Register an item into multiple ItemGroups
+     *
+     * @param groups ItemGroups to add to
+     */
     public static void registerItem(Identifier id, Item item, ItemGroupSettings... groups) {
         Registry.register(Registries.ITEM, id, item);
         if (groups != null) {
@@ -34,5 +46,9 @@ public class ItemRegistryHelper {
         }
     }
 
+    /**
+     * @param group - The ItemGroup to add to
+     * @param after - Optionally, the item to add after
+     */
     public record ItemGroupSettings(ItemGroup group, @Nullable ItemConvertible after) { }
 }

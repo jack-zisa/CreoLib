@@ -25,6 +25,7 @@ public class CBlockTags {
     public static final TagKey<Block> CONDUIT_FRAME_BASE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "conduit_frame_base_blocks"));
     public static final TagKey<Block> NETHER_PORTAL_FRAME_BASE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "nether_portal_frame_base_blocks"));
     public static final TagKey<Block> EATEN_BY_SHEEP = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "eaten_by_sheep"));
+    public static final TagKey<Block> PROJECTILES_IGNORE = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "projectiles_ignore"));
     // endregion
 
     // region Non-Functional Tags
