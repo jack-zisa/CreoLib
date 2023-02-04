@@ -18,7 +18,6 @@
     "block.FarmlandBlockMixin",
     "block.ObserverBlockMixin",
     "block.SugarCaneBlockMixin",
-    "block.TripwireBlockMixin",
     "block.entity.BeaconBlockEntityMixin",
     "block.entity.ConduitBlockEntityMixin",
     "client.screen.GrindstoneScreenHandlerMixin",
