@@ -36,7 +36,6 @@ public abstract class EntityMixin {
     @Shadow public abstract BlockPos getBlockPos();
     @Shadow public abstract void setVelocity(Vec3d velocity);
     @Shadow public abstract Vec3d getVelocity();
-
     @Shadow protected boolean onGround;
     private static final ImmutableMap<DamageSource, TagKey<EntityType<?>>> DAMAGE_IMMUNITIES = new ImmutableMap.Builder<DamageSource, TagKey<EntityType<?>>>()
             .put(DamageSource.CACTUS, CEntityTypeTags.CACTUS_IMMUNE)

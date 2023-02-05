@@ -21,6 +21,10 @@ public class CEntityTypeTags {
     public static final TagKey<EntityType<?>> PROJECTILES_IGNORE = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "projectiles_ignore"));
     public static final TagKey<EntityType<?>> WALKS_ON_WATER = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "walks_on_water"));
     public static final TagKey<EntityType<?>> WALKS_ON_LAVA = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "walks_on_lava"));
+    public static final TagKey<EntityType<?>> UNDEAD = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "undead"));
+    public static final TagKey<EntityType<?>> ARTHROPOD = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "arthropod"));
+    public static final TagKey<EntityType<?>> AQUATIC = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "aquatic"));
+    public static final TagKey<EntityType<?>> ILLAGER = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "illager"));
 
     /**
      * TODO:

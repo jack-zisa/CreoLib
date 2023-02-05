@@ -48,19 +48,11 @@ public class CBlockTags {
     /**
      * TODO:
      *
-     * Carver Carvable
-     * Dead Coral Blocks
-     * Dead Coral
-     * Dead Coral Fans
-     * Dead Coral Plants
      * Observer Ignores*
      * Nylium Replaceables
-     * Nether Portal Base Blocks*
-     * Projectiles Ignore
      * Immovable
      * Silverfish Infested
      * Silverfish Disturbers
-     * Scares Hoglins
      * Anvil Softeners
      * Dye Color/
      */

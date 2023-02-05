@@ -2,12 +2,10 @@ package com.github.creoii.creolib.mixin.entity;
 
 import com.github.creoii.creolib.enchantment.EquippableEnchantment;
 import com.github.creoii.creolib.registry.AttributeRegistry;
+import com.github.creoii.creolib.tag.CEntityTypeTags;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -39,7 +37,6 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
     @Shadow protected abstract int computeFallDamage(float fallDistance, float damageMultiplier);
     @Shadow public abstract Vec3d applyFluidMovingSpeed(double gravity, boolean falling, Vec3d motion);
-
     private static final EntityAttributeModifier SLOW_FALLING = new EntityAttributeModifier(UUID.fromString("A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA"), "Slow falling acceleration reduction", -0.07d, EntityAttributeModifier.Operation.ADDITION);
     private static EntityAttributeInstance gravity;
 
@@ -106,5 +103,18 @@ public abstract class LivingEntityMixin extends Entity {
                 equippableEnchantment.onEquip(world, this, oldStack, slot, newSet.get(enchantment));
             }
         });
+    }
+
+    @Inject(method = "getGroup", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_entityGroupTags(CallbackInfoReturnable<EntityGroup> cir) {
+        if (getType().isIn(CEntityTypeTags.UNDEAD)) {
+            cir.setReturnValue(EntityGroup.UNDEAD);
+        } else if (getType().isIn(CEntityTypeTags.AQUATIC)) {
+            cir.setReturnValue(EntityGroup.AQUATIC);
+        } else if (getType().isIn(CEntityTypeTags.ARTHROPOD)) {
+            cir.setReturnValue(EntityGroup.ARTHROPOD);
+        } else if (getType().isIn(CEntityTypeTags.ILLAGER)) {
+            cir.setReturnValue(EntityGroup.ILLAGER);
+        }
     }
 }
