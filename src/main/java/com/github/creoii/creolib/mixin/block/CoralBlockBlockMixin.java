@@ -1,7 +1,6 @@
 package com.github.creoii.creolib.mixin.block;
 
 import com.github.creoii.creolib.tag.CBlockTags;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.CoralBlockBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

@@ -37,6 +37,7 @@
     "world.dimension.NetherPortalMixin"
   ],
   "client": [
+    "client.BackgroundRendererMixin",
     "world.ClientWorldMixin"
   ],
   "injectors": {
