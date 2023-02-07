@@ -38,6 +38,7 @@
   ],
   "client": [
     "client.BackgroundRendererMixin",
+    "client.InGameHudMixin",
     "world.ClientWorldMixin"
   ],
   "injectors": {

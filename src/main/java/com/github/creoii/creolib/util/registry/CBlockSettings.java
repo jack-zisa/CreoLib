@@ -28,7 +28,7 @@ public class CBlockSettings extends FabricBlockSettings {
         super(settings);
     }
 
-    public static CBlockSettings toOverrideSettings(Block block) {
+    public static CBlockSettings copy(Block block) {
         CBlockSettings settings = new CBlockSettings(block.getDefaultState().getMaterial(), block.getDefaultMapColor());
         settings.strength(block.getHardness(), block.getBlastResistance());
         if (block.hasRandomTicks(block.getDefaultState())) settings.ticksRandomly();

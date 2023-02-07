@@ -2,7 +2,6 @@ package com.github.creoii.creolib.world.surface;
 
 import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.util.MathUtil;
-import com.github.creoii.creolib.util.WorldUtil;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

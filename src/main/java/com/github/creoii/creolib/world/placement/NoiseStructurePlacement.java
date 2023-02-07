@@ -2,7 +2,6 @@ package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.StructurePlacementTypeRegistry;
 import com.github.creoii.creolib.util.MathUtil;
-import com.github.creoii.creolib.util.WorldUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.RegistryKey;
