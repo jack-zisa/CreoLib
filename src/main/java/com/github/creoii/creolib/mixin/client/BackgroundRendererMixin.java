@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -27,9 +28,12 @@ public class BackgroundRendererMixin {
             RegistryKey<Biome> biomeKey = registryEntry.getKey().get();
             if (BiomeFogModifier.BIOME_FOG_MODIFIERS.containsKey(biomeKey)) {
                 BiomeFogModifier modifier = BiomeFogModifier.BIOME_FOG_MODIFIERS.get(biomeKey);
-                RenderSystem.setShaderFogStart(viewDistance * modifier.fogStart());
-                RenderSystem.setShaderFogEnd(Math.min(viewDistance, 192f) * modifier.fogEnd());
-                RenderSystem.setShaderFogShape(modifier.fogShape());
+                fogData.fogStart = modifier.fogStart().apply(new BiomeFogModifier.FogFunction((ClientWorld) entity.world, entity, viewDistance, tickDelta));
+                fogData.fogEnd = modifier.fogEnd().apply(new BiomeFogModifier.FogFunction((ClientWorld) entity.world, entity, viewDistance, tickDelta));
+                fogData.fogShape = modifier.fogShape();
+                RenderSystem.setShaderFogStart(fogData.fogStart);
+                RenderSystem.setShaderFogEnd(fogData.fogEnd);
+                RenderSystem.setShaderFogShape(fogData.fogShape);
                 ci.cancel();
             }
         }
