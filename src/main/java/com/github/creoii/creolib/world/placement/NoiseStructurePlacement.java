@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.StructurePlacementTypeRegistry;
+import com.github.creoii.creolib.util.MathUtil;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -23,17 +24,17 @@ public class NoiseStructurePlacement extends StructurePlacement {
     public static final Codec<NoiseStructurePlacement> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(RegistryKey.createCodec(RegistryKeys.NOISE_PARAMETERS).fieldOf("noise_parameters").forGetter(predicate -> {
             return predicate.noise;
-        }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
+        }), MathUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new MathUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
         }), Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(predicate -> {
             return predicate.chance;
         })).and(buildCodec(instance)).apply(instance, NoiseStructurePlacement::new);
     });
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
-    private final List<WorldUtil.Range> ranges;
+    private final List<MathUtil.Range> ranges;
     private final float chance;
 
-    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, float chance, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public NoiseStructurePlacement(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<MathUtil.Range> ranges, float chance, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;
@@ -45,7 +46,7 @@ public class NoiseStructurePlacement extends StructurePlacement {
         DoublePerlinNoiseSampler sampler = calculator.getNoiseConfig().getOrCreateSampler(noise);
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
         double noiseValue = sampler.sample(pos.getX(), 0d, pos.getZ());
-        for (WorldUtil.Range range : ranges) {
+        for (MathUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;
             }

@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.PlacementModifierRegistry;
-import com.github.creoii.creolib.util.WorldUtil;
+import com.github.creoii.creolib.util.MathUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -18,14 +18,14 @@ public class DensityFunctionPlacementModifier extends AbstractConditionalPlaceme
     public static final Codec<DensityFunctionPlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(DensityFunction.REGISTRY_ENTRY_CODEC.fieldOf("density_function").forGetter(predicate -> {
             return predicate.densityFunction;
-        }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
+        }), MathUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new MathUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
         })).apply(instance, DensityFunctionPlacementModifier::new);
     });
     private final RegistryEntry<DensityFunction> densityFunction;
-    private final List<WorldUtil.Range> ranges;
+    private final List<MathUtil.Range> ranges;
 
-    public DensityFunctionPlacementModifier(RegistryEntry<DensityFunction> densityFunction, List<WorldUtil.Range> ranges) {
+    public DensityFunctionPlacementModifier(RegistryEntry<DensityFunction> densityFunction, List<MathUtil.Range> ranges) {
         this.densityFunction = densityFunction;
         this.ranges = ranges;
     }
@@ -33,7 +33,7 @@ public class DensityFunctionPlacementModifier extends AbstractConditionalPlaceme
     @Override
     public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         double value = densityFunction.value().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
-        for (WorldUtil.Range range : ranges) {
+        for (MathUtil.Range range : ranges) {
             if (value >= range.min() && value < range.max()) {
                 return true;
             }

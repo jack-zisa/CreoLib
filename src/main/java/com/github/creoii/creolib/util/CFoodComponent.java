@@ -7,6 +7,10 @@ import net.minecraft.item.FoodComponent;
 
 import java.util.List;
 
+/**
+ * Extension of {@link FoodComponent} allowing custom eating speeds
+ * Any use of this class won't be considered a snack
+ */
 public class CFoodComponent extends FoodComponent {
     private final int eatTime;
 

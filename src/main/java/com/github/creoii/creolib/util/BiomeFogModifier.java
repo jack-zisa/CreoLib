@@ -12,6 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Used to give a biome custom fog densities
+ *
+ * @param fogStart Distance from the camera where the fog starts
+ * @param fogEnd Distance from the camera where the fog is completely dense
+ */
 @Environment(EnvType.CLIENT)
 public record BiomeFogModifier(Function<FogFunction, Float> fogStart, Function<FogFunction, Float> fogEnd, FogShape fogShape) {
     public static final Map<RegistryKey<Biome>, BiomeFogModifier> BIOME_FOG_MODIFIERS = new HashMap<>();

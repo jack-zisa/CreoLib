@@ -2,6 +2,7 @@ package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.registry.StructurePlacementTypeRegistry;
+import com.github.creoii.creolib.util.MathUtil;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
@@ -23,17 +24,17 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
     public static final Codec<FastNoiseStructurePlacement> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(predicate -> {
             return predicate.noise;
-        }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
+        }), MathUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new MathUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
         }), Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(predicate -> {
             return predicate.chance;
         })).and(buildCodec(instance)).apply(instance, FastNoiseStructurePlacement::new);
     });
     private final RegistryEntry<FastNoiseLite> noise;
-    private final List<WorldUtil.Range> ranges;
+    private final List<MathUtil.Range> ranges;
     private final float chance;
 
-    public FastNoiseStructurePlacement(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges, float chance, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
+    public FastNoiseStructurePlacement(RegistryEntry<FastNoiseLite> noise, List<MathUtil.Range> ranges, float chance, Vec3i locateOffset, FrequencyReductionMethod frequencyReductionMethod, float frequency, int salt, Optional<ExclusionZone> exclusionZone) {
         super(locateOffset, frequencyReductionMethod, frequency, salt, exclusionZone);
         this.noise = noise;
         this.ranges = ranges;
@@ -44,7 +45,7 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
         if (RANDOM.nextFloat() > chance) return false;
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
         double noiseValue = noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
-        for (WorldUtil.Range range : ranges) {
+        for (MathUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;
             }

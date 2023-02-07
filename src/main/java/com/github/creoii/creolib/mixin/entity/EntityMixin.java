@@ -10,7 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Shadow public boolean noClip;
     @Shadow public abstract BlockState getBlockStateAtPos();
     @Shadow public abstract EntityType<?> getType();
     @Shadow public abstract World getWorld();
@@ -34,20 +33,34 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isInLava();
     @Shadow public abstract boolean isTouchingWater();
     @Shadow public abstract BlockPos getBlockPos();
-    @Shadow public abstract void setVelocity(Vec3d velocity);
     @Shadow public abstract Vec3d getVelocity();
+    @Shadow public abstract void setVelocity(Vec3d velocity);
+    @Shadow public abstract double getX();
+    @Shadow public abstract double getZ();
+    @Shadow public abstract boolean isSubmergedInWater();
+    @Shadow public abstract boolean isDescending();
+    @Shadow public abstract boolean isSpectator();
     @Shadow protected boolean onGround;
+    @Shadow public boolean noClip;
+
     private static final ImmutableMap<DamageSource, TagKey<EntityType<?>>> DAMAGE_IMMUNITIES = new ImmutableMap.Builder<DamageSource, TagKey<EntityType<?>>>()
+            .put(DamageSource.GENERIC, CEntityTypeTags.GENERIC_IMMUNE)
+            .put(DamageSource.FALL, CEntityTypeTags.FALL_IMMUNE)
             .put(DamageSource.CACTUS, CEntityTypeTags.CACTUS_IMMUNE)
             .put(DamageSource.SWEET_BERRY_BUSH, CEntityTypeTags.SWEET_BERRY_BUSH_IMMUNE)
             .put(DamageSource.STALAGMITE, CEntityTypeTags.DRIPSTONE_IMMUNE)
             .put(DamageSource.LIGHTNING_BOLT, CEntityTypeTags.LIGHTNING_IMMUNE)
-            .put(DamageSource.FREEZE, EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)
             .put(DamageSource.WITHER, CEntityTypeTags.WITHER_IMMUNE)
             .put(DamageSource.MAGIC, CEntityTypeTags.MAGIC_IMMUNE)
             .put(DamageSource.DROWN, CEntityTypeTags.DROWNING_IMMUNE)
             .put(DamageSource.IN_FIRE, CEntityTypeTags.FIRE_IMMUNE)
             .put(DamageSource.ON_FIRE, CEntityTypeTags.FIRE_IMMUNE)
+            .put(DamageSource.IN_WALL, CEntityTypeTags.SUFFOCATION_IMMUNE)
+            .put(DamageSource.FLY_INTO_WALL, CEntityTypeTags.FLY_INTO_WALL_IMMUNE)
+            .put(DamageSource.STARVE, CEntityTypeTags.STARVATION_IMMUNE)
+            .put(DamageSource.CRAMMING, CEntityTypeTags.CRAMMING_IMMUNE)
+            .put(DamageSource.OUT_OF_WORLD, CEntityTypeTags.OUT_OF_WORLD_IMMUNE)
+            .put(DamageSource.DRYOUT, CEntityTypeTags.DRYOUT_IMMUNE)
             .build();
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -80,24 +93,28 @@ public abstract class EntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void creo_lib_walkOnFluids(CallbackInfo ci) {
-        if (getType().isIn(CEntityTypeTags.WALKS_ON_WATER) || getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) {
-            ShapeContext shapeContext = ShapeContext.of((Entity) (Object) this);
-            if (isInLava() || isTouchingWater()) {
-                if (!shapeContext.isAbove(FluidBlock.COLLISION_SHAPE, getBlockPos(), true) || getWorld().getFluidState(getBlockPos().up()).isIn(isTouchingWater() ? FluidTags.WATER : FluidTags.LAVA)) {
-                    setVelocity(getVelocity().multiply(.5d).add(0d, .05d, 0d));
-                } else onGround = true;
+        if (!isSpectator()) {
+            if (getType().isIn(CEntityTypeTags.WALKS_ON_WATER) || getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) {
+                ShapeContext shapeContext = ShapeContext.of((Entity) (Object) this);
+                if ((isInLava() || (isTouchingWater() && !isSubmergedInWater())) && !isDescending()) {
+                    if (!shapeContext.isAbove(FluidBlock.COLLISION_SHAPE, getBlockPos(), true) || getWorld().getFluidState(getBlockPos().up()).isIn(isTouchingWater() ? FluidTags.WATER : FluidTags.LAVA)) {
+                        setVelocity(getVelocity().multiply(.5d).add(0d, .05d, 0d));
+                    } else onGround = true;
+                }
+                checkBlockCollision();
             }
-            checkBlockCollision();
         }
     }
 
     @Inject(method = "fall", at = @At("TAIL"), cancellable = true)
     private void creo_lib_landOnFluids(CallbackInfo ci) {
-        if (getType().isIn(CEntityTypeTags.WALKS_ON_WATER) || getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) {
-            checkBlockCollision();
-            if ((isInLava() && getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) || (isTouchingWater() && getType().isIn(CEntityTypeTags.WALKS_ON_WATER))) {
-                onLanding();
-                ci.cancel();
+        if (!isSpectator()) {
+            if (getType().isIn(CEntityTypeTags.WALKS_ON_WATER) || getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) {
+                checkBlockCollision();
+                if ((isInLava() && getType().isIn(CEntityTypeTags.WALKS_ON_LAVA)) || ((isTouchingWater() && !isSubmergedInWater()) && getType().isIn(CEntityTypeTags.WALKS_ON_WATER))) {
+                    onLanding();
+                    ci.cancel();
+                }
             }
         }
     }
@@ -105,6 +122,13 @@ public abstract class EntityMixin {
     @Inject(method = "canAvoidTraps", at = @At("HEAD"), cancellable = true)
     private void creo_lib_canAvoidTraps(CallbackInfoReturnable<Boolean> cir) {
         if (getType().isIn(CEntityTypeTags.AVOIDS_TRAPS)) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "isCollidable", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_isCollidable(CallbackInfoReturnable<Boolean> cir) {
+        if (getType().isIn(CEntityTypeTags.COLLIDABLE)) {
             cir.setReturnValue(true);
         }
     }

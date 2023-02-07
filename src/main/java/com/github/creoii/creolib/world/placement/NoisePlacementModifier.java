@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.PlacementModifierRegistry;
+import com.github.creoii.creolib.util.MathUtil;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -23,23 +24,23 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
     public static final Codec<NoisePlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(RegistryKey.createCodec(RegistryKeys.NOISE_PARAMETERS).fieldOf("noise_parameters").forGetter(predicate -> {
             return predicate.noise;
-        }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
+        }), MathUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new MathUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
         }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
             return predicate.threeDimensional;
         })).apply(instance, NoisePlacementModifier::new);
     });
     private final RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise;
-    private final List<WorldUtil.Range> ranges;
+    private final List<MathUtil.Range> ranges;
     private final boolean threeDimensional;
 
-    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges, boolean threeDimensional) {
+    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<MathUtil.Range> ranges, boolean threeDimensional) {
         this.noise = noise;
         this.ranges = ranges;
         this.threeDimensional = threeDimensional;
     }
 
-    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<WorldUtil.Range> ranges) {
+    public NoisePlacementModifier(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> noise, List<MathUtil.Range> ranges) {
         this(noise, ranges, false);
     }
 
@@ -48,7 +49,7 @@ public class NoisePlacementModifier extends AbstractConditionalPlacementModifier
         if (context.getWorld().getChunkManager() instanceof ServerChunkManager chunkManager) {
             DoublePerlinNoiseSampler sampler = chunkManager.getNoiseConfig().getOrCreateSampler(noise);
             double noiseValue = threeDimensional ? sampler.sample(pos.getX(), pos.getY(), pos.getZ()) : sampler.sample(pos.getX(), 0d, pos.getZ());
-            for (WorldUtil.Range range : ranges) {
+            for (MathUtil.Range range : ranges) {
                 if (noiseValue >= range.min() && noiseValue < range.max()) {
                     return true;
                 }

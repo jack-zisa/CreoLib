@@ -28,8 +28,17 @@ public class BlockUtil {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).hardness(hardness));
     }
 
+    public static void setBreakInstantly(Block block) {
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrDefaultSettings(block).hardness(0f).resistance(0f));
+    }
+
     public static float getHardness(Block block) {
         return ((BlockSettingsAccessor) getOrDefaultSettings(block)).getHardness();
+    }
+
+    public static boolean breaksInstantly(Block block) {
+        BlockSettingsAccessor settings = ((BlockSettingsAccessor) getOrDefaultSettings(block));
+        return settings.getHardness() == 0f && settings.getResistance() == 0f;
     }
 
     public static void setResistance(Block block, float resistance) {

@@ -2,6 +2,7 @@ package com.github.creoii.creolib.world.placement;
 
 import com.github.creoii.creolib.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.registry.PlacementModifierRegistry;
+import com.github.creoii.creolib.util.MathUtil;
 import com.github.creoii.creolib.util.WorldUtil;
 import com.github.creoii.creolib.util.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
@@ -22,30 +23,30 @@ public class FastNoisePlacementModifier extends AbstractConditionalPlacementModi
     public static final Codec<FastNoisePlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(FastNoiseParametersRegistry.REGISTRY_CODEC.fieldOf("noise").forGetter(predicate -> {
             return predicate.noise;
-        }), WorldUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new WorldUtil.Range(-1d, 1d))).forGetter(predicate -> {
+        }), MathUtil.Range.CODEC.listOf().optionalFieldOf("ranges", List.of(new MathUtil.Range(-1d, 1d))).forGetter(predicate -> {
             return predicate.ranges;
         }), Codec.BOOL.optionalFieldOf("3d", false).forGetter(predicate -> {
             return predicate.threeDimensional;
         })).apply(instance, FastNoisePlacementModifier::new);
     });
     private final RegistryEntry<FastNoiseLite> noise;
-    private final List<WorldUtil.Range> ranges;
+    private final List<MathUtil.Range> ranges;
     private final boolean threeDimensional;
 
-    public FastNoisePlacementModifier(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges, boolean threeDimensional) {
+    public FastNoisePlacementModifier(RegistryEntry<FastNoiseLite> noise, List<MathUtil.Range> ranges, boolean threeDimensional) {
         this.noise = noise;
         this.ranges = ranges;
         this.threeDimensional = threeDimensional;
     }
 
-    public FastNoisePlacementModifier(RegistryEntry<FastNoiseLite> noise, List<WorldUtil.Range> ranges) {
+    public FastNoisePlacementModifier(RegistryEntry<FastNoiseLite> noise, List<MathUtil.Range> ranges) {
         this(noise, ranges, false);
     }
 
     @Override
     public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
         double noiseValue = threeDimensional ? noise.value().GetNoise(pos.getX(), pos.getY(), pos.getZ()) : noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
-        for (WorldUtil.Range range : ranges) {
+        for (MathUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;
             }
