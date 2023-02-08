@@ -9,9 +9,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
 import net.minecraft.entity.EntityType;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public final class BlockUtil {
     public final static Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
@@ -106,6 +110,19 @@ public final class BlockUtil {
         return ((BlockSettingsAccessor) getOrCreateSettings(block)).getMaterial().getColor();
     }
 
+
+    public static void setOffsetType(Block block, Function<BlockState, AbstractBlock.OffsetType> offsetType) {
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offsetType(offsetType));
+    }
+
+    public static void setOffsetType(Block block, AbstractBlock.OffsetType offsetType) {
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offsetType(state -> offsetType));
+    }
+
+    public static AbstractBlock.OffsetType getOffsetType(BlockState state) {
+        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getOffsetType().apply(state);
+    }
+
     public static void setNoCollision(Block block) {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).noCollision());
     }
@@ -130,8 +147,8 @@ public final class BlockUtil {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).emissiveLighting(emissive));
     }
 
-    public static AbstractBlock.ContextPredicate isEmissive(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).hasEmissiveLighting();
+    public static boolean isEmissive(BlockState state, BlockView world, BlockPos pos) {
+        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).hasEmissiveLighting().test(state, world, pos);
     }
 
     public static void setPostProcessing(Block block, boolean postProcessing) {
@@ -142,8 +159,8 @@ public final class BlockUtil {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).postProcess(postProcessing));
     }
 
-    public static AbstractBlock.ContextPredicate hasPostProcessing(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).hasPostProcessing();
+    public static boolean hasPostProcessing(BlockState state, BlockView world, BlockPos pos) {
+        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).hasPostProcessing().test(state, world, pos);
     }
 
     public static void setSuffocates(Block block, boolean suffocates) {
@@ -154,8 +171,8 @@ public final class BlockUtil {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).suffocates(suffocates));
     }
 
-    public static AbstractBlock.ContextPredicate doesSuffocate(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).suffocates();
+    public static boolean doesSuffocate(BlockState state, BlockView world, BlockPos pos) {
+        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).suffocates().test(state, world, pos);
     }
 
     public static void setAllowsSpawning(Block block, boolean allows) {
@@ -166,8 +183,8 @@ public final class BlockUtil {
         BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).allowsSpawning(allows));
     }
 
-    public static AbstractBlock.TypedContextPredicate<EntityType<?>> allowsSpawning(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).allowsSpawning();
+    public static boolean allowsSpawning(BlockState state, BlockView world, BlockPos pos, EntityType<?> entityType) {
+        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).allowsSpawning().test(state, world, pos, entityType);
     }
 
     public static void setFireSettings(Block block, CBlockSettings.FireSettings fireSettings) {
