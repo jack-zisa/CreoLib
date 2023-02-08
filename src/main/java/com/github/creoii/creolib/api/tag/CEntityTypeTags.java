@@ -33,6 +33,7 @@ public final class CEntityTypeTags {
     public static final TagKey<EntityType<?>> WARDEN_IGNORES = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "warden_ignores"));
     public static final TagKey<EntityType<?>> SCARES_CREEPERS = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "scares_creepers"));
     public static final TagKey<EntityType<?>> CAN_BREATHE_IN_WATER = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "can_breathe_in_water"));
+    public static final TagKey<EntityType<?>> GLINTED = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "glinted"));
     public static final TagKey<EntityType<?>> UNDEAD = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "undead"));
     public static final TagKey<EntityType<?>> ARTHROPOD = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "arthropod"));
     public static final TagKey<EntityType<?>> AQUATIC = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "aquatic"));

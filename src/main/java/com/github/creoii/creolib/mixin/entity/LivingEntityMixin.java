@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.mixin.entity;
 
 import com.github.creoii.creolib.api.enchantment.EquippableEnchantment;
+import com.github.creoii.creolib.api.entity.GlintableEntity;
 import com.github.creoii.creolib.core.registry.AttributeRegistry;
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
 import net.minecraft.enchantment.Enchantment;
@@ -31,7 +32,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity implements GlintableEntity {
     @Shadow public abstract double getAttributeValue(EntityAttribute attribute);
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
@@ -39,9 +40,20 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract Vec3d applyFluidMovingSpeed(double gravity, boolean falling, Vec3d motion);
     private static final EntityAttributeModifier SLOW_FALLING = new EntityAttributeModifier(UUID.fromString("A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA"), "Slow falling acceleration reduction", -0.07d, EntityAttributeModifier.Operation.ADDITION);
     private static EntityAttributeInstance gravity;
+    private boolean hasGlint;
 
     private LivingEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Override
+    public void setGlinted(boolean hasGlint) {
+        this.hasGlint = hasGlint;
+    }
+
+    @Override
+    public boolean hasGlint() {
+        return hasGlint;
     }
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
