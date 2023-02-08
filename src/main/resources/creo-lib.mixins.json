@@ -1,14 +1,13 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.github.creoii.creolib.impl.mixin",
+  "package": "com.github.creoii.creolib.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "block.AbstractBlockAccessor",
     "block.AbstractBlockStateMixin",
     "block.AbstractFireBlockMixin",
     "block.AnvilBlockMixin",
-    "block.BlockEntityTypeMixin",
     "block.BlockSettingsAccessor",
     "block.CactusBlockMixin",
     "block.CampfireBlockMixin",
@@ -19,14 +18,18 @@
     "block.ObserverBlockMixin",
     "block.SugarCaneBlockMixin",
     "block.entity.BeaconBlockEntityMixin",
+    "block.entity.BlockEntityTypeMixin",
     "block.entity.ConduitBlockEntityMixin",
     "client.screen.GrindstoneScreenHandlerMixin",
     "enchantment.EnchantmentMixin",
+    "entity.CreeperEntityMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
     "entity.PlayerEntityMixin",
     "entity.ProjectileEntityMixin",
     "entity.RavagerEntityMixin",
+    "entity.ShulkerEntityMixin",
+    "entity.WardenEntityMixin",
     "entity.ZoglinEntityMixin",
     "entity.ai.EatGrassGoalMixin",
     "item.ItemMixin",
@@ -34,12 +37,14 @@
     "item.ShearsItemMixin",
     "registry.RegistryLoaderMixin",
     "world.ServerWorldMixin",
-    "world.dimension.NetherPortalMixin"
+    "world.dimension.NetherPortalMixin",
+    "world.poi.PointOfInterestTypesMixin"
   ],
   "client": [
     "client.BackgroundRendererMixin",
     "client.InGameHudMixin",
     "client.MinecraftClientMixin",
+    "client.render.LivingEntityRendererMixin",
     "world.ClientWorldMixin"
   ],
   "injectors": {

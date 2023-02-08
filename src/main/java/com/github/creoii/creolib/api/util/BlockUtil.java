@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.api.util;
 
-import com.github.creoii.creolib.impl.mixin.block.BlockSettingsAccessor;
+import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;

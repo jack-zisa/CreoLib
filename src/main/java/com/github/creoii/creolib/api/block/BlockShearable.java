@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 /**
  * Allows shears to interact with a block when this interface is implemented
+ * See Also: {@link net.minecraft.entity.Shearable}, {@link net.minecraft.item.ShearsItem}
  */
 public interface BlockShearable {
     boolean isShearable(World world, BlockState state, BlockPos pos, PlayerEntity player, Random random, Direction side);

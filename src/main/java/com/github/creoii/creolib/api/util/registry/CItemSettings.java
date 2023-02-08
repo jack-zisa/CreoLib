@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.api.util.registry;
 
-import com.github.creoii.creolib.impl.mixin.item.ItemSettingsAccessor;
+import com.github.creoii.creolib.mixin.item.ItemSettingsAccessor;
 import com.github.creoii.creolib.api.util.CFoodComponent;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.FoodComponent;
