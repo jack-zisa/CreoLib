@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class WardenEntityMixin {
     @Inject(method = "isValidTarget", at = @At("RETURN"), cancellable = true)
     private void creo_lib_wardenIgnores(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getType().isIn(CEntityTypeTags.WARDEN_IGNORES)) cir.setReturnValue(false);
+        if (entity != null && entity.getType().isIn(CEntityTypeTags.WARDEN_IGNORES)) cir.setReturnValue(false);
     }
 }

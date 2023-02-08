@@ -4,6 +4,7 @@ import com.github.creoii.creolib.api.entity.GlintableEntity;
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -28,9 +29,9 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     }
 
     @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"))
-    private void creo_lib_glintedEntities(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+    private void creo_lib_glintedEntities(T livingEntity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         if (livingEntity.getType().isIn(CEntityTypeTags.GLINTED) || livingEntity instanceof GlintableEntity glintableEntity && glintableEntity.hasGlint()) {
-            model.render(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getEntityGlint()), i, OverlayTexture.field_32953, .5f, .5f, .5f, 1f);
+            model.render(matrices, vertexConsumerProvider.getBuffer(RenderLayer.getEntityGlint()), i, OverlayTexture.field_32953, .5f, .5f, .5f, 1f);
         }
     }
 }
