@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.util;
+package com.github.creoii.creolib.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

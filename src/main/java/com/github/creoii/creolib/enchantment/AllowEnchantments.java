@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.util;
+package com.github.creoii.creolib.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 

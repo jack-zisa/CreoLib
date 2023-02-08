@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
-public class WorldUtil {
+public final class WorldUtil {
     public static void broadcast(@NotNull ServerWorld world, Text text, Predicate<ServerPlayerEntity> playerEntityPredicate) {
         world.getPlayers().forEach(playerEntity -> {
             if (playerEntityPredicate.test(playerEntity)) {

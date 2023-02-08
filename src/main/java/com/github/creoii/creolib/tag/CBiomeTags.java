@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.tag;
 
-public class CBiomeTags {
+public final class CBiomeTags {
     /**
      * TODO:
      *

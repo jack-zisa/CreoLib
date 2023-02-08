@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
-public class FastNoiseParametersRegistry extends FabricDynamicRegistryProvider {
+public final class FastNoiseParametersRegistry extends FabricDynamicRegistryProvider {
     public static final RegistryKey<Registry<FastNoiseLite>> FAST_NOISE_SETTINGS = RegistryKey.ofRegistry(new Identifier(CreoLib.NAMESPACE, "worldgen/fast_noise"));
     public static final Codec<RegistryEntry<FastNoiseLite>> REGISTRY_CODEC = RegistryElementCodec.of(FAST_NOISE_SETTINGS, FastNoiseLite.CODEC);
 

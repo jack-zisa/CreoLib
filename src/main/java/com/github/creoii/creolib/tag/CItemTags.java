@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.tag;
 
-public class CItemTags {
+public final class CItemTags {
     /**
      * TODO:
      *

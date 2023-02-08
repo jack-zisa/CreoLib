@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class RegistrySets {
+public final class RegistrySets {
     /**
      * Registers most blocks required in a wood set.
      *      Does not register signs, leaves, saplings, or boats.

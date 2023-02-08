@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.util;
+package com.github.creoii.creolib.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

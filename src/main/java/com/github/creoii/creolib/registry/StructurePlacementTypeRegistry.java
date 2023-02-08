@@ -10,7 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.chunk.placement.StructurePlacementType;
 
-public class StructurePlacementTypeRegistry {
+public final class StructurePlacementTypeRegistry {
     public static StructurePlacementType<FixedStructurePlacement> FIXED = () -> FixedStructurePlacement.CODEC;
     public static StructurePlacementType<DistanceFromZeroStructurePlacement> DISTANCE_FROM_ZERO = () -> DistanceFromZeroStructurePlacement.CODEC;
     public static StructurePlacementType<NoiseStructurePlacement> NOISE = () -> NoiseStructurePlacement.CODEC;

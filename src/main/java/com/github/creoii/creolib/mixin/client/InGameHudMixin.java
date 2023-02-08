@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.client;
 
-import com.github.creoii.creolib.util.OverlayRenderer;
+import com.github.creoii.creolib.client.OverlayRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

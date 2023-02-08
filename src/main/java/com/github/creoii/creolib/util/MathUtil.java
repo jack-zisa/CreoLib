@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.random.Random;
 
-public class MathUtil {
+public final class MathUtil {
     public static final Random RANDOM = Random.create();
 
     /**
@@ -23,6 +23,15 @@ public class MathUtil {
         return n;
     }
 
+    /**
+     * Same as {@link MathUtil#randomLerp(Range, int, int)} except bounces with a value of @param n when hitting the bounds
+     */
+    public float bounceRandomLerp(Range bounds, int n, int r) {
+        n = RANDOM.nextBoolean() ? n + r : n - r;
+        if (n < (float) bounds.min()) return (float) bounds.min() + n;
+        else if (n > (float) bounds.max()) return (float) bounds.max() + n;
+        return n;
+    }
 
     public record Range(double min, double max) {
         public static final Codec<Range> CODEC = RecordCodecBuilder.create(instance -> {

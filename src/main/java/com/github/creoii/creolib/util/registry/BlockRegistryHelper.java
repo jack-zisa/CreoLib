@@ -12,7 +12,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockRegistryHelper {
+public final class BlockRegistryHelper {
     public static void registerBlock(Identifier id, Block block) {
         Registry.register(Registries.BLOCK, id, block);
         if (((AbstractBlockAccessor) block).creo_lib_getBlockSettings() instanceof CBlockSettings settings) {

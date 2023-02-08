@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.item;
 
-import com.github.creoii.creolib.util.BlockShearable;
+import com.github.creoii.creolib.block.BlockShearable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;

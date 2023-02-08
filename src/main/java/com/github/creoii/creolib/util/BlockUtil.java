@@ -13,8 +13,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockUtil {
-    public static Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
+public final class BlockUtil {
+    public final static Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
 
     public static CBlockSettings getOrCreateSettings(Block block) {
         if (BLOCK_SETTINGS_REPLACED.containsKey(block)) return BLOCK_SETTINGS_REPLACED.get(block);

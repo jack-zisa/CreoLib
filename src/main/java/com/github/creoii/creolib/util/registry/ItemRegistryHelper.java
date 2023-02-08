@@ -9,7 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public class ItemRegistryHelper {
+public final class ItemRegistryHelper {
     /**
      * Register an item
      * Optionally, add the item to an itemgroup after an item

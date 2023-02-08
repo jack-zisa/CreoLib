@@ -6,7 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-public class CEnchantmentTags {
+public final class CEnchantmentTags {
     // region Functional Tags
     public static final TagKey<Enchantment> CURSED = TagKey.of(RegistryKeys.ENCHANTMENT, new Identifier(CreoLib.COMMON, "cursed"));
     public static final TagKey<Enchantment> TREASURE = TagKey.of(RegistryKeys.ENCHANTMENT, new Identifier(CreoLib.COMMON, "treasure"));
