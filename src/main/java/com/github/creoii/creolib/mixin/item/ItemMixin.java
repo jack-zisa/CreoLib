@@ -4,21 +4,27 @@ import com.github.creoii.creolib.api.util.CFoodComponent;
 import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
 import com.github.creoii.creolib.api.util.registry.CItemSettings;
 import com.github.creoii.creolib.api.util.registry.ItemRegistryHelper;
+import com.github.creoii.creolib.core.registry.AttributeRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.RaycastContext;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -71,5 +77,10 @@ public abstract class ItemMixin implements ItemSettingsDuck {
         if (getFoodComponent() instanceof CFoodComponent cfoodComponent) {
             cir.setReturnValue(cfoodComponent.getEatTime());
         }
+    }
+
+    @ModifyConstant(method = "raycast(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/RaycastContext$FluidHandling;)Lnet/minecraft/util/hit/BlockHitResult;", constant = @Constant(doubleValue = 5d))
+    private static double creo_lib_raycastReachDistance(double constant, World world, PlayerEntity player, RaycastContext.FluidHandling fluidHandling) {
+        return player.getAttributeValue(AttributeRegistry.PLAYER_REACH_DISTANCE);
     }
 }

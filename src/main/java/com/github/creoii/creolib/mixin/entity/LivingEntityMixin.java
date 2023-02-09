@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void creo_lib_createNewAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY).add(AttributeRegistry.GENERIC_SWIM_SPEED);
+        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY).add(AttributeRegistry.GENERIC_SWIM_SPEED).add(AttributeRegistry.GENERIC_ATTACK_RANGE);
     }
 
     @Inject(method = "knockDownwards", at = @At("HEAD"), cancellable = true)
@@ -91,7 +91,7 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
 
     @Inject(method = "swimUpward", at = @At("HEAD"), cancellable = true)
     private void creo_lib_applyUpwardSwimSpeed(TagKey<Fluid> fluid, CallbackInfo ci) {
-        setVelocity(getVelocity().add(0.0D, 0.03999999910593033D * getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED), 0.0D));
+        setVelocity(getVelocity().add(0d, .03999999910593033d * getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED), 0d));
         ci.cancel();
     }
 
@@ -102,17 +102,17 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
     }
 
     @Inject(method = "onEquipStack", at = @At("TAIL"))
-    private void creo_lib_applyGravityEnchantments(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
-        Map<Enchantment, Integer> oldSet = EnchantmentHelper.get(oldStack);
-        oldSet.keySet().forEach(enchantment -> {
+    private void creo_lib_applyEquippableEnchantments(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
+        Map<Enchantment, Integer> unequipped = EnchantmentHelper.get(oldStack);
+        unequipped.keySet().forEach(enchantment -> {
             if (enchantment instanceof EquippableEnchantment equippableEnchantment) {
-                equippableEnchantment.onUnequip(world, this, oldStack, slot, oldSet.get(enchantment));
+                equippableEnchantment.onUnequip(world, this, oldStack, slot, unequipped.get(enchantment));
             }
         });
-        Map<Enchantment, Integer> newSet = EnchantmentHelper.get(newStack);
-        newSet.keySet().forEach(enchantment -> {
+        Map<Enchantment, Integer> equipped = EnchantmentHelper.get(newStack);
+        equipped.keySet().forEach(enchantment -> {
             if (enchantment instanceof EquippableEnchantment equippableEnchantment) {
-                equippableEnchantment.onEquip(world, this, oldStack, slot, newSet.get(enchantment));
+                equippableEnchantment.onEquip(world, this, oldStack, slot, equipped.get(enchantment));
             }
         });
     }

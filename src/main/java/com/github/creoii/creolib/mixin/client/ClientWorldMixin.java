@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.mixin.world;
+package com.github.creoii.creolib.mixin.client;
 
 import com.github.creoii.creolib.api.util.Tickable;
 import com.github.creoii.creolib.api.world.ClientWorldTicker;

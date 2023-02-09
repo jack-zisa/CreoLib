@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.core;
 
+import com.github.creoii.creolib.api.tag.CBiomeTags;
 import com.github.creoii.creolib.core.registry.*;
 import net.fabricmc.api.ModInitializer;
 
@@ -15,5 +16,6 @@ public final class CreoLib implements ModInitializer {
         StructurePlacementTypeRegistry.register();
         MaterialConditionRegistry.register();
         DensityFunctionTypeRegistry.register();
+        CBiomeTags.loadVanillaFeatureTags();
     }
 }

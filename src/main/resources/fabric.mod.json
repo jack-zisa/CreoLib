@@ -16,7 +16,7 @@
       "com.github.creoii.creolib.core.CreoLib"
     ],
     "fabric-datagen": [
-      "com.github.creoii.creolib.util.datagen.CreoDataGenerator"
+      "com.github.creoii.creolib.core.datagen.CreoDataGenerator"
     ]
   },
   "accessWidener": "creo_lib.accesswidener",
@@ -26,5 +26,12 @@
   "depends": {
     "fabricloader": ">=0.4.0",
     "minecraft": "1.19.3"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [
+        "library"
+      ]
+    }
   }
 }
