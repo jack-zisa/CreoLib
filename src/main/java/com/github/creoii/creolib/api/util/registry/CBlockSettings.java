@@ -1,15 +1,18 @@
 package com.github.creoii.creolib.api.util.registry;
 
+import com.github.creoii.creolib.api.util.BlockUtil;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor;
 import net.fabricmc.fabric.mixin.content.registry.ShovelItemAccessor;
 import net.minecraft.block.*;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.HoneycombItem;
 
 public class CBlockSettings extends FabricBlockSettings {
     private FireSettings fireSettings;
+    private DripSettings dripSettings;
     private Block strippedBlock;
     private BlockState flattenedState;
     private LandPathNodeTypesRegistry.PathNodeTypeProvider pathNodeProvider;
@@ -38,6 +41,7 @@ public class CBlockSettings extends FabricBlockSettings {
         settings.jumpVelocityMultiplier(block.getVelocityMultiplier());
         FlammableBlockRegistry.Entry entry = FlammableBlockRegistry.getDefaultInstance().get(block);
         settings.fireSettings(new FireSettings(entry.getBurnChance(), entry.getSpreadChance()));
+        settings.dripSettings(BlockUtil.getDripSettings(block));
         settings.strippedBlock(AxeItemAccessor.getStrippedBlocks().get(block));
         settings.flattenedState(ShovelItemAccessor.getPathStates().get(block));
         LandPathNodeTypesRegistry.PathNodeTypeProvider provider = LandPathNodeTypesRegistry.getPathNodeTypeProvider(block);
@@ -53,6 +57,11 @@ public class CBlockSettings extends FabricBlockSettings {
 
     public CBlockSettings fireSettings(FireSettings fireSettings) {
         this.fireSettings = fireSettings;
+        return this;
+    }
+
+    public CBlockSettings dripSettings(DripSettings dripSettings) {
+        this.dripSettings = dripSettings;
         return this;
     }
 
@@ -90,6 +99,10 @@ public class CBlockSettings extends FabricBlockSettings {
         return fireSettings;
     }
 
+    public DripSettings getDripSettings() {
+        return dripSettings;
+    }
+
     public Block getStrippedBlock() {
         return strippedBlock;
     }
@@ -111,4 +124,5 @@ public class CBlockSettings extends FabricBlockSettings {
     }
 
     public record FireSettings(int burnChance, int spreadChance) {}
+    public record DripSettings(BlockState drippedState, Fluid fluid) {}
 }

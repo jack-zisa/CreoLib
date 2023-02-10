@@ -1,8 +1,8 @@
 package com.github.creoii.creolib.api.util.registry;
 
-import com.github.creoii.creolib.mixin.block.AbstractBlockAccessor;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.*;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemConvertible;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public final class BlockRegistryHelper {
     public static void registerBlock(Identifier id, Block block) {
         Registry.register(Registries.BLOCK, id, block);
-        if (((AbstractBlockAccessor) block).creo_lib_getBlockSettings() instanceof CBlockSettings settings) {
+        if (((AbstractBlockAccessor) block).getSettings() instanceof CBlockSettings settings) {
             FlammableBlockRegistry.getDefaultInstance().add(block, settings.getFireSettings().burnChance(), settings.getFireSettings().spreadChance());
             StrippableBlockRegistry.register(block, settings.getStrippedBlock());
             FlattenableBlockRegistry.register(block, settings.getFlattenedState());

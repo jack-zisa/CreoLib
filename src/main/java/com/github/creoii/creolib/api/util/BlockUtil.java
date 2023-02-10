@@ -195,6 +195,14 @@ public final class BlockUtil {
         return getOrCreateSettings(block).getFireSettings();
     }
 
+    public static void setDripSettings(Block block, CBlockSettings.DripSettings dripSettings) {
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).dripSettings(dripSettings));
+    }
+
+    public static CBlockSettings.DripSettings getDripSettings(Block block) {
+        return getOrCreateSettings(block).getDripSettings();
+    }
+
     public static void setStrippedBlock(Block block, Block stripped) {
         BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).strippedBlock(stripped));
     }

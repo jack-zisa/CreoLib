@@ -16,6 +16,7 @@
     "block.CoralParentBlockMixin",
     "block.FarmlandBlockMixin",
     "block.ObserverBlockMixin",
+    "block.PointedDripstoneBlockMixin",
     "block.SugarCaneBlockMixin",
     "block.entity.AbstractFurnaceBlockEntityMixin",
     "block.entity.BeaconBlockEntityMixin",
