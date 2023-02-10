@@ -24,6 +24,7 @@ public final class CBlockTags {
     public static final TagKey<Block> CACTUS_PLANTABLE_ON = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "cactus_plantable_on"));
     public static final TagKey<Block> CONDUIT_FRAME_BASE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "conduit_frame_base_blocks"));
     public static final TagKey<Block> NETHER_PORTAL_FRAME_BASE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "nether_portal_frame_base_blocks"));
+    public static final TagKey<Block> CAN_DRIP_THROUGH = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "can_drip_through"));
     public static final TagKey<Block> EATEN_BY_SHEEP = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "eaten_by_sheep"));
     public static final TagKey<Block> PROJECTILES_IGNORE = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "projectiles_ignore"));
     public static final TagKey<Block> INVALID_FOR_SHULKER_TELEPORT = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "invalid_for_shulker_teleport"));

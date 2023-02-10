@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.mixin.enchantment;
 
-import com.github.creoii.creolib.api.tag.CEnchantmentTags;
 import com.github.creoii.creolib.api.enchantment.AllowEnchantments;
+import com.github.creoii.creolib.api.tag.CEnchantmentTags;
 import com.github.creoii.creolib.api.util.TagUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;

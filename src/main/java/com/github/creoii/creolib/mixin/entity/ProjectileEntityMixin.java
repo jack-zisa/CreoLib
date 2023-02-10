@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

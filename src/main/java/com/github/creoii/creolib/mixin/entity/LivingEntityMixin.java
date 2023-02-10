@@ -2,8 +2,8 @@ package com.github.creoii.creolib.mixin.entity;
 
 import com.github.creoii.creolib.api.enchantment.EquippableEnchantment;
 import com.github.creoii.creolib.api.entity.GlintableEntity;
-import com.github.creoii.creolib.core.registry.AttributeRegistry;
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
+import com.github.creoii.creolib.core.registry.AttributeRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;

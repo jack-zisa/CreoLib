@@ -1,8 +1,8 @@
 package com.github.creoii.creolib.core.registry;
 
-import com.github.creoii.creolib.core.CreoLib;
 import com.github.creoii.creolib.api.world.feature.CompositeFeature;
 import com.github.creoii.creolib.api.world.feature.config.CompositeFeatureConfig;
+import com.github.creoii.creolib.core.CreoLib;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.api.util;
 
-import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
+import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.Map;

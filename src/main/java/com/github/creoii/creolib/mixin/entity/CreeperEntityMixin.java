@@ -2,13 +2,11 @@ package com.github.creoii.creolib.mixin.entity;
 
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

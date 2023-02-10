@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.api.world.densityfunction;
 
-import com.github.creoii.creolib.core.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.core.noise.FastNoiseLite;
+import com.github.creoii.creolib.core.registry.FastNoiseParametersRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;

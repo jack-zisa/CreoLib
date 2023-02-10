@@ -3,8 +3,6 @@ package com.github.creoii.creolib.mixin.server;
 import com.github.creoii.creolib.api.tag.CBlockTags;
 import com.github.creoii.creolib.api.util.Tickable;
 import com.github.creoii.creolib.api.world.ServerWorldTicker;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;

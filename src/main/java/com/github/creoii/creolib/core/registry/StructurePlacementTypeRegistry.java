@@ -1,10 +1,10 @@
 package com.github.creoii.creolib.core.registry;
 
-import com.github.creoii.creolib.core.CreoLib;
 import com.github.creoii.creolib.api.world.placement.DistanceFromZeroStructurePlacement;
 import com.github.creoii.creolib.api.world.placement.FastNoiseStructurePlacement;
 import com.github.creoii.creolib.api.world.placement.FixedStructurePlacement;
 import com.github.creoii.creolib.api.world.placement.NoiseStructurePlacement;
+import com.github.creoii.creolib.core.CreoLib;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.mixin.registry;
 
-import com.github.creoii.creolib.core.registry.FastNoiseParametersRegistry;
 import com.github.creoii.creolib.core.noise.FastNoiseLite;
+import com.github.creoii.creolib.core.registry.FastNoiseParametersRegistry;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.registry.RegistryLoader;
 import org.spongepowered.asm.mixin.Final;

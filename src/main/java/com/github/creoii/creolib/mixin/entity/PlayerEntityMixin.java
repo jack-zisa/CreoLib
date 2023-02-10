@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.mixin.entity;
 
-import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
 import com.github.creoii.creolib.api.util.registry.CItemSettings;
+import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
 import com.github.creoii.creolib.core.registry.AttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;

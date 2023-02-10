@@ -1,8 +1,6 @@
 package com.github.creoii.creolib.mixin.server;
 
 import com.github.creoii.creolib.core.registry.AttributeRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.util.math.MathHelper;
