@@ -1,7 +1,6 @@
 package com.github.creoii.creolib.api.util.registry;
 
 import com.github.creoii.creolib.api.util.CFoodComponent;
-import com.github.creoii.creolib.mixin.item.ItemSettingsAccessor;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.FoodComponent;
 
@@ -63,7 +62,7 @@ public class CItemSettings extends FabricItemSettings {
     }
 
     public FoodComponent getFoodComponent() {
-        return ((ItemSettingsAccessor) this).getFoodComponent();
+        return foodComponent;
     }
 
     public ItemRegistryHelper.ItemGroupSettings[] getItemGroups() {

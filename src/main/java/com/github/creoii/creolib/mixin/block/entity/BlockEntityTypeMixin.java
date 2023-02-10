@@ -19,7 +19,6 @@ public class BlockEntityTypeMixin {
             .put(BlockEntityType.HANGING_SIGN, state -> state.isIn(BlockTags.ALL_HANGING_SIGNS))
             .put(BlockEntityType.CHEST, state -> state.isIn(CBlockTags.CHESTS))
             .put(BlockEntityType.TRAPPED_CHEST, state -> state.isIn(CBlockTags.TRAPPED_CHESTS))
-            .put(BlockEntityType.FURNACE, state -> state.isIn(CBlockTags.FURNACES))
             .put(BlockEntityType.BANNER, state -> state.isIn(BlockTags.BANNERS))
             .put(BlockEntityType.BED, state -> state.isIn(BlockTags.BEDS))
             .put(BlockEntityType.CAMPFIRE, state -> state.isIn(BlockTags.CAMPFIRES))

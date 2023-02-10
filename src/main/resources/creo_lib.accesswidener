@@ -12,3 +12,4 @@ accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRu
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockY I
 accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockZ I
 accessible field net/minecraft/screen/GrindstoneScreenHandler input Lnet/minecraft/inventory/Inventory;
+accessible field net/minecraft/item/Item$Settings foodComponent Lnet/minecraft/item/FoodComponent;

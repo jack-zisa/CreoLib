@@ -1,8 +1,6 @@
 package com.github.creoii.creolib.api.util.registry;
 
-import com.github.creoii.creolib.api.util.BlockUtil;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor;
 import net.fabricmc.fabric.mixin.content.registry.ShovelItemAccessor;
@@ -39,9 +37,8 @@ public class CBlockSettings extends FabricBlockSettings {
         settings.slipperiness(block.getSlipperiness());
         settings.velocityMultiplier(block.getVelocityMultiplier());
         settings.jumpVelocityMultiplier(block.getVelocityMultiplier());
-        FlammableBlockRegistry.Entry entry = FlammableBlockRegistry.getDefaultInstance().get(block);
-        settings.fireSettings(new FireSettings(entry.getBurnChance(), entry.getSpreadChance()));
-        settings.dripSettings(BlockUtil.getDripSettings(block));
+        //settings.fireSettings(BlockUtil.getFireSettings(block));
+        //settings.dripSettings(BlockUtil.getDripSettings(block));
         settings.strippedBlock(AxeItemAccessor.getStrippedBlocks().get(block));
         settings.flattenedState(ShovelItemAccessor.getPathStates().get(block));
         LandPathNodeTypesRegistry.PathNodeTypeProvider provider = LandPathNodeTypesRegistry.getPathNodeTypeProvider(block);

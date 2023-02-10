@@ -16,16 +16,23 @@ public final class BlockRegistryHelper {
     public static void registerBlock(Identifier id, Block block) {
         Registry.register(Registries.BLOCK, id, block);
         if (((AbstractBlockAccessor) block).getSettings() instanceof CBlockSettings settings) {
-            FlammableBlockRegistry.getDefaultInstance().add(block, settings.getFireSettings().burnChance(), settings.getFireSettings().spreadChance());
-            StrippableBlockRegistry.register(block, settings.getStrippedBlock());
-            FlattenableBlockRegistry.register(block, settings.getFlattenedState());
-            OxidizableBlocksRegistry.registerWaxableBlockPair(block, settings.getWaxed());
-            OxidizableBlocksRegistry.registerOxidizableBlockPair(block, settings.getOxidized());
-            LandPathNodeTypesRegistry.PathNodeTypeProvider provider = settings.getPathNodeProvider();
-            if (provider instanceof LandPathNodeTypesRegistry.DynamicPathNodeTypeProvider dynamic) {
-                LandPathNodeTypesRegistry.registerDynamic(block, dynamic);
-            } else if (provider instanceof LandPathNodeTypesRegistry.StaticPathNodeTypeProvider staticProvider)
-                LandPathNodeTypesRegistry.register(block, staticProvider);
+            if (settings.getFireSettings() != null)
+                FlammableBlockRegistry.getDefaultInstance().add(block, settings.getFireSettings().burnChance(), settings.getFireSettings().spreadChance());
+            if (settings.getStrippedBlock() != null)
+                StrippableBlockRegistry.register(block, settings.getStrippedBlock());
+            if (settings.getFlattenedState() != null)
+                FlattenableBlockRegistry.register(block, settings.getFlattenedState());
+            if (settings.getWaxed() != null)
+                OxidizableBlocksRegistry.registerWaxableBlockPair(block, settings.getWaxed());
+            if (settings.getOxidized() != null)
+                OxidizableBlocksRegistry.registerOxidizableBlockPair(block, settings.getOxidized());
+            if (settings.getPathNodeProvider() != null) {
+                LandPathNodeTypesRegistry.PathNodeTypeProvider provider = settings.getPathNodeProvider();
+                if (provider instanceof LandPathNodeTypesRegistry.DynamicPathNodeTypeProvider dynamic) {
+                    LandPathNodeTypesRegistry.registerDynamic(block, dynamic);
+                } else if (provider instanceof LandPathNodeTypesRegistry.StaticPathNodeTypeProvider staticProvider)
+                    LandPathNodeTypesRegistry.register(block, staticProvider);
+            }
         }
     }
 

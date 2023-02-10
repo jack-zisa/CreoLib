@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(ShulkerEntity.class)
 public class ShulkerEntityMixin {
     @Inject(method = "isInvalidPosition", at = @At(value = "RETURN", ordinal = 1), cancellable = true, locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void creo_lib_invalidShulkerTPStates(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState blockState, boolean bl) {
-        if (blockState.isIn(CBlockTags.INVALID_FOR_SHULKER_TELEPORT)) cir.setReturnValue(false);
+    private void creo_lib_invalidShulkerStates(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState blockState, boolean bl) {
+        if (blockState.isIn(CBlockTags.INVALID_FOR_SHULKER_TELEPORT)) cir.setReturnValue(true);
     }
 }
