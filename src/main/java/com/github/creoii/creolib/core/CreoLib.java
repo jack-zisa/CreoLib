@@ -19,7 +19,5 @@ public final class CreoLib implements ModInitializer {
         MaterialConditionRegistry.register();
         DensityFunctionTypeRegistry.register();
         CBiomeTags.loadVanillaFeatureTags();
-
-        RegistrySets.createColorSet(NAMESPACE, "teal", 1, MapColor.TEAL, 1, 1, MapColor.TERRACOTTA_BLUE).register();
     }
 }
