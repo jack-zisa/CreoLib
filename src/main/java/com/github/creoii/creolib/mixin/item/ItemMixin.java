@@ -40,21 +40,16 @@ public abstract class ItemMixin implements ItemSettingsDuck {
         this.settings = settings;
         if (settings instanceof CItemSettings cSettings) {
             this.foodComponent = cSettings.getFoodComponent();
-            if (cSettings.getFuelPower() > 0) {
+            if (cSettings.getFuelPower() > 0)
                 FuelRegistry.INSTANCE.add((Item) (Object) this, cSettings.getFuelPower());
-            }
-            if (cSettings.getCompostingChance() > 0f) {
+            if (cSettings.getCompostingChance() > 0f)
                 CompostingChanceRegistry.INSTANCE.add((ItemConvertible) this, cSettings.getCompostingChance());
-            }
-            if (cSettings.isVillagerCollectable()) {
+            if (cSettings.isVillagerCollectable())
                 VillagerInteractionRegistries.registerCollectable((ItemConvertible) this);
-            }
-            if (cSettings.isFarmerCompostable()) {
+            if (cSettings.isFarmerCompostable())
                 VillagerInteractionRegistries.registerCompostable((ItemConvertible) this);
-            }
-            if (cSettings.getVillagerFoodValue() > 0) {
+            if (cSettings.getVillagerFoodValue() > 0)
                 VillagerInteractionRegistries.registerFood((ItemConvertible) this, cSettings.getVillagerFoodValue());
-            }
             if (cSettings.getItemGroups() != null) {
                 for (ItemRegistryHelper.ItemGroupSettings itemGroupSettings : cSettings.getItemGroups()) {
                     if (itemGroupSettings.after() != null) {

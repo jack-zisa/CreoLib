@@ -4,6 +4,7 @@
   "package": "com.github.creoii.creolib.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block.AbstractBlockMixin",
     "block.AbstractBlockStateMixin",
     "block.AbstractFireBlockMixin",
     "block.AnvilBlockMixin",

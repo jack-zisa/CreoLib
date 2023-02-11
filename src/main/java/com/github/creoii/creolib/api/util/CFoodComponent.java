@@ -19,6 +19,10 @@ public class CFoodComponent extends FoodComponent {
         this.eatTime = eatTime;
     }
 
+    public CFoodComponent(int hunger, float saturationModifier, boolean meat, boolean alwaysEdible, int eatTime) {
+        this(hunger, saturationModifier, meat, alwaysEdible, eatTime, List.of());
+    }
+
     public int getEatTime() {
         return eatTime;
     }

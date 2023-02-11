@@ -1,5 +1,7 @@
 package com.github.creoii.creolib.api.util.registry;
 
+import com.github.creoii.creolib.api.util.BlockUtil;
+import com.github.creoii.creolib.core.duck.AbstractBlockDuck;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor;
@@ -37,8 +39,8 @@ public class CBlockSettings extends FabricBlockSettings {
         settings.slipperiness(block.getSlipperiness());
         settings.velocityMultiplier(block.getVelocityMultiplier());
         settings.jumpVelocityMultiplier(block.getVelocityMultiplier());
-        //settings.fireSettings(BlockUtil.getFireSettings(block));
-        //settings.dripSettings(BlockUtil.getDripSettings(block));
+        settings.fireSettings(((AbstractBlockDuck) block).getFireSettings());
+        settings.dripSettings(((AbstractBlockDuck) block).getDripSettings());
         settings.strippedBlock(AxeItemAccessor.getStrippedBlocks().get(block));
         settings.flattenedState(ShovelItemAccessor.getPathStates().get(block));
         LandPathNodeTypesRegistry.PathNodeTypeProvider provider = LandPathNodeTypesRegistry.getPathNodeTypeProvider(block);
@@ -120,6 +122,4 @@ public class CBlockSettings extends FabricBlockSettings {
         return oxidized;
     }
 
-    public record FireSettings(int burnChance, int spreadChance) {}
-    public record DripSettings(BlockState drippedState, Fluid fluid) {}
 }

@@ -2,6 +2,7 @@ package com.github.creoii.creolib.mixin.block;
 
 import com.github.creoii.creolib.api.tag.CBlockTags;
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
+import com.github.creoii.creolib.api.util.registry.DripSettings;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -26,7 +27,7 @@ public class PointedDripstoneBlockMixin {
     private static void creo_lib_dripBlocks(BlockState state, ServerWorld world, BlockPos pos, float dripChance, CallbackInfo ci, Optional<PointedDripstoneBlock.DrippingFluid> optional, Fluid fluid, float f, BlockPos blockPos) {
         BlockState sourceState = optional.get().sourceState();
         if (((AbstractBlockAccessor) sourceState.getBlock()).getSettings() instanceof CBlockSettings settings) {
-            CBlockSettings.DripSettings dripSettings = settings.getDripSettings();
+            DripSettings dripSettings = settings.getDripSettings();
             if (fluid == dripSettings.fluid()) {
                 BlockState blockState = dripSettings.drippedState();
                 world.setBlockState(optional.get().pos(), blockState);

@@ -1,6 +1,8 @@
 package com.github.creoii.creolib.api.util;
 
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
+import com.github.creoii.creolib.api.util.registry.DripSettings;
+import com.github.creoii.creolib.api.util.registry.FireSettings;
 import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -186,19 +188,19 @@ public final class BlockUtil {
         return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).allowsSpawning().test(state, world, pos, entityType);
     }
 
-    public static void setFireSettings(Block block, CBlockSettings.FireSettings fireSettings) {
+    public static void setFireSettings(Block block, FireSettings fireSettings) {
         BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).fireSettings(fireSettings));
     }
 
-    public static CBlockSettings.FireSettings getFireSettings(Block block) {
+    public static FireSettings getFireSettings(Block block) {
         return getOrCreateSettings(block).getFireSettings();
     }
 
-    public static void setDripSettings(Block block, CBlockSettings.DripSettings dripSettings) {
+    public static void setDripSettings(Block block, DripSettings dripSettings) {
         BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).dripSettings(dripSettings));
     }
 
-    public static CBlockSettings.DripSettings getDripSettings(Block block) {
+    public static DripSettings getDripSettings(Block block) {
         return getOrCreateSettings(block).getDripSettings();
     }
 
