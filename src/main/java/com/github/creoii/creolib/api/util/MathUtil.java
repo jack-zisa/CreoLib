@@ -16,7 +16,7 @@ public final class MathUtil {
      * @param r The lerp value
      * @return Randomly lerped value of n
      */
-    public float randomLerp(Range bounds, int n, int r) {
+    public static float randomLerp(Range bounds, int n, int r) {
         n = RANDOM.nextBoolean() ? n + r : n - r;
         if (n < (float) bounds.min()) return (float) bounds.min();
         else if (n > (float) bounds.max()) return (float) bounds.max();
@@ -26,11 +26,18 @@ public final class MathUtil {
     /**
      * Same as {@link MathUtil#randomLerp(Range, int, int)} except bounces with a value of @param n when hitting the bounds
      */
-    public float bounceRandomLerp(Range bounds, int n, int r) {
+    public static float bounceRandomLerp(Range bounds, int n, int r) {
         n = RANDOM.nextBoolean() ? n + r : n - r;
         if (n < (float) bounds.min()) return (float) bounds.min() + n;
         else if (n > (float) bounds.max()) return (float) bounds.max() + n;
         return n;
+    }
+
+    public static double pow(double a, double b) {
+        for (int i = 1; i < b; ++i) {
+            a *= a;
+        }
+        return a;
     }
 
     public record Range(double min, double max) {

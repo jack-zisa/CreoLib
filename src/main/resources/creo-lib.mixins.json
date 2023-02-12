@@ -49,7 +49,8 @@
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "world.dimension.NetherPortalMixin",
-    "world.poi.PointOfInterestTypesMixin"
+    "world.poi.PointOfInterestTypesMixin",
+    "world.surface.SurfaceBuilderMixin"
   ],
   "client": [
     "client.BackgroundRendererMixin",
